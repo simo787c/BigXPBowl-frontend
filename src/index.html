@@ -25,6 +25,48 @@
 
 <body>
     <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="height: 56px;">
+            <div class="container-fluid">
+                <button class="navbar-toggle" type="button" aria-expanded="false"
+                    aria-label="Toggle navigation" id="sidebarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                    <a class="navbar-brand">Big XP Bowl</a>
+                </button>
+            </div>
+            <div id="card-logout">
+                <div class="container-fluid text-light">
+                    <div class="row row-cols-2">
+                        <div class="col-9 d-flex justify-content-center align-items-center">
+                            <b>Welcome</b>&nbsp;<span id="login-username"></span>
+                        </div>
+                        <div class="col-3 p-0">
+                            <a class="btn btn-sm btn-primary" href="#/logout" style="float:right">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="card-login">
+                <form id="form-login" class="form-inline">
+                    <div class="container-fluid p-0">
+                        <div class="row row-cols-3">
+                            <div class="col-auto p-0">
+                                <input id="username" class="form-control-sm login-style" type="text"
+                                    placeholder="Username" aria-label="Username" required minlength="3">
+                            </div>
+                            <div class="col-auto p-0">
+                                <input id="password" class="form-control-sm login-style" type="password"
+                                    placeholder="Password" aria-label="Password" required minlength="3">
+                            </div>
+                            <div class="col-auto ps-1 d-flex justify-content-center align-items-center">
+                                <button class="btn btn-sm btn-primary" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+        
         <!-- Vertical navbar -->
         <div class="vertical-nav bg-white" id="sidebar">
             <div class="py-4 px-3 mb-4 bg-light">
@@ -99,9 +141,6 @@
 
     <!-- Page content holder -->
 <div class="page-content p-5" id="content">
-    <!-- Toggle button -->
-    <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
-  
     <!-- Demo content -->
     <h2 class="display-4 text-white">Bootstrap vertical nav</h2>
     <p class="lead text-white mb-0">Build a fixed sidebar using Bootstrap 4 vertical navigation and media objects.</p>
