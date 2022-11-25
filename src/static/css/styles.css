@@ -182,8 +182,9 @@ button[data-controls="next"] {
     align-items: center;
 }
 
-.slider-width {
+.slider-style {
     max-width: 400px;
+    border-radius: 10px;
 }
 
 /* Card effect */
