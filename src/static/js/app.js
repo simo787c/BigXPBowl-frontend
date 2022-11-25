@@ -82,6 +82,7 @@ function bowling() {
 
 function airHockey() {
     $('#view').html(cloneHtmlTemplate('template-air-hockey'));
+    tableRenderer.updateUI();
 };
 
 /**
