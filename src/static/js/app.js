@@ -12,6 +12,7 @@ const ROUTE_TEMPLATE_KEY_HOME = 'home'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
 const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
 const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
+const ROUTE_TEMPLATE_KEY_DINER = 'diner'
 const ROUTE_TEMPLATE_KEY_LOGIN = 'login'
 const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
@@ -24,10 +25,11 @@ const ROUTE_HOME = '/'
 const ROUTE_ABOUT = '/about'
 const ROUTE_BOWLING = '/bowling'
 const ROUTE_AIRHOCKEY = '/airHockey'
+const ROUTE_DINER = '/diner'
 const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
-const ROUTE_EQUIPMENT = '/equipment'
+const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
 
 /**
  * Defines the routing templates used.
@@ -36,6 +38,7 @@ template(ROUTE_TEMPLATE_KEY_HOME, home)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
 template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
 template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
+template(ROUTE_TEMPLATE_KEY_DINER, diner)
 template(ROUTE_TEMPLATE_KEY_LOGIN, login)
 template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
@@ -48,10 +51,11 @@ route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
 route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
 route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
+route(ROUTE_DINER, ROUTE_TEMPLATE_KEY_DINER);
 route(ROUTE_LOGIN, ROUTE_TEMPLATE_KEY_LOGIN);
 route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
-route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_EQUIPMENT);
+route(ROUTE_EQUIPMENT, ROUTE_TEMPLATE_KEY_EQUIPMENT);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
  */
@@ -86,6 +90,10 @@ function bowling() {
 function airHockey() {
     $('#view').html(cloneHtmlTemplate('template-air-hockey'));
     tableRenderer.updateUI();
+};
+
+function diner() {
+    $('#view').html(cloneHtmlTemplate('template-diner'));
 };
 
 function equipment() {
