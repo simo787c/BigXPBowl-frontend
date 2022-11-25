@@ -77,6 +77,7 @@ function about() {
 
 function bowling() {
     $('#view').html(cloneHtmlTemplate('template-bowling'));
+    
 };
 
 function airHockey() {
