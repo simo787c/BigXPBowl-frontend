@@ -20,6 +20,8 @@
 
     <script src="./static/js/router.js" defer></script>
     <script src="./static/js/app.js" defer></script>
+    <script src="./static/js/util-fetch.js" defer></script>
+    <script src="./static/js/userSys/getLanes.js" defer> </script>
 
 </head>
 
@@ -307,7 +309,15 @@
         <template id="template-bowling">
             <div class="page-content" id="content">
                 <h2 class="text-center">Bowling</h2>
+                <div id="lanes">
+                </div>
             </div>
+        </template>
+
+        <template id="template-lane">
+            <label id="laneNr"></label>
+            <label id="description"></label>
+            <label id="status"></label>
         </template>
 
         <template id="template-air-hockey">

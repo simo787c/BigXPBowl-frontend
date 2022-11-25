@@ -5,15 +5,18 @@ class LanesRenderer {
         this.getData();
     }
 
-    getData() {
+    async getData () {
         this.data = await utilFetch.operationData("activities/bowling","","","GET");
         this.updateUI();
     }
 
-    updateUI(){
+    async updateUI(){
         let page = cloneHtmlTemplate("template-bowling")
 
         let lanes = page.querySelector("lanes")
+
+        this.data = await utilFetch.operationData("activities/bowling","","","GET");
+
         
         try {
             //clear lanes div content

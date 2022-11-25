@@ -27,4 +27,4 @@ class UtilFetch {
         }
     }  
 }
-var UtilFetch = new UtilFetch();
+var utilFetch = new UtilFetch();
