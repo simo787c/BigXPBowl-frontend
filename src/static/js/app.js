@@ -10,6 +10,8 @@ var htmlTemplateCache = new Map()
  */
 const ROUTE_TEMPLATE_KEY_HOME = 'home'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
+const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
+const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
 const ROUTE_TEMPLATE_KEY_LOGIN = 'login'
 const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
@@ -19,6 +21,8 @@ const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
  */
 const ROUTE_HOME = '/'
 const ROUTE_ABOUT = '/about'
+const ROUTE_BOWLING = '/bowling'
+const ROUTE_AIRHOCKEY = '/airHockey'
 const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
@@ -28,6 +32,8 @@ const ROUTE_ADMIN = '/admin'
  */
 template(ROUTE_TEMPLATE_KEY_HOME, home)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
+template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
+template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
 template(ROUTE_TEMPLATE_KEY_LOGIN, login)
 template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
@@ -37,6 +43,8 @@ template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
  */
 route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
+route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
+route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
 route(ROUTE_LOGIN, ROUTE_TEMPLATE_KEY_LOGIN);
 route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
@@ -58,7 +66,6 @@ function cloneHtmlTemplate(id) {
  */
 function home() {
     $('#view').html(cloneHtmlTemplate('template-home'));
-    imageUploader.updateGallery()
 }
 
 /**
@@ -66,6 +73,14 @@ function home() {
  */
 function about() {
     $('#view').html(cloneHtmlTemplate('template-about'));
+};
+
+function bowling() {
+    $('#view').html(cloneHtmlTemplate('template-bowling'));
+};
+
+function airHockey() {
+    $('#view').html(cloneHtmlTemplate('template-air-hockey'));
 };
 
 /**

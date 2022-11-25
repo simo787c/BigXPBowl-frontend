@@ -60,18 +60,17 @@
     width: 17rem;
     height: 100vh;
     position: fixed;
-    top: 0;
+    top: 56px;
     left: 0;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.4s;
-    padding-top: 50px;
-    z-index: -1;
   }
   
   .page-content {
     width: calc(100% - 17rem);
     margin-left: 17rem;
     transition: all 0.4s;
+    margin-top: 56px;
   }
   
   /* for toggle behavior */
@@ -140,4 +139,11 @@
     border: var(--bs-border-width) solid var(--bs-navbar-toggler-border-color);
     border-radius: var(--bs-navbar-toggler-border-radius);
     transition: var(--bs-navbar-toggler-transition);
+  }
+
+  footer {
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
