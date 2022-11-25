@@ -28,9 +28,9 @@
     <script src="./static/js/app.js" defer></script>
     <script src="./static/js/util-fetch.js" defer></script>
     <script src="./static/js/userSys/getLanes.js" defer> </script>
+    <script src="./static/js/userSys/getTables.js"></script>
 
 </head>
-
 <body>
     <header>
         <!-- Navbar -->
@@ -397,6 +397,7 @@
         <template id="template-air-hockey">
             <div class="page-content" id="content">
                 <h2 class="text-center">Air Hockey</h2>
+                <div id="tables"></div>
             </div>
         </template>
 
@@ -406,6 +407,13 @@
                 <div id="table"></div>
             </div>
         </template>
+
+        <template id="template-table">
+            <label id="tableNr"></label>
+            <label id="description"></label>
+            <label id="status"></label>
+        </template>
+
 
         <template id="template-image">
             <div class="card row">
