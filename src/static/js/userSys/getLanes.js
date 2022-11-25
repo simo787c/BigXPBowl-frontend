@@ -11,9 +11,11 @@ class LanesRenderer {
     }
 
     async updateUI(){
+        
         let page = cloneHtmlTemplate("template-bowling")
+        //let lanes = page.querySelector("lanes")
 
-        let lanes = page.querySelector("lanes")
+        let lanes = document.getElementById("lanes");
 
         this.data = await utilFetch.operationData("activities/bowling","","","GET");
 
@@ -25,11 +27,13 @@ class LanesRenderer {
             //iterate through each lane, then clone and assign a htmltemplate for it
             this.data.forEach(element => {
                 let clone = cloneHtmlTemplate("template-lane")
+                let laneNr = clone.querySelector("#laneNr")
+                let desc = clone.querySelector("#description")
+                let status = clone.querySelector("#status")
                 
-                
-                clone.getElementById("laneNr").innerHTML += element.bowlingLaneNr
-                clone.getElementById("description").innerHTML += element.description
-                clone.getElementById("status").innerHTML += element.bowlingLaneStatus
+                laneNr.innerHTML += element.bowlingLaneNr
+                desc.innerHTML += element.description
+                status.innerHTML += element.bowlingLaneStatus
 
                 lanes.appendChild(clone)
             });
