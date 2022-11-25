@@ -15,6 +15,7 @@ const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
 const ROUTE_TEMPLATE_KEY_LOGIN = 'login'
 const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
+const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
 
 /**
  * Route constants.
@@ -26,6 +27,7 @@ const ROUTE_AIRHOCKEY = '/airHockey'
 const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
+const ROUTE_EQUIPMENT = '/equipment'
 
 /**
  * Defines the routing templates used.
@@ -37,6 +39,7 @@ template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
 template(ROUTE_TEMPLATE_KEY_LOGIN, login)
 template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
+template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
 
 /**
  * Defines the #/... url routes and the templates they match..
@@ -48,7 +51,7 @@ route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
 route(ROUTE_LOGIN, ROUTE_TEMPLATE_KEY_LOGIN);
 route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
-
+route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_EQUIPMENT);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
  */
@@ -82,6 +85,10 @@ function bowling() {
 
 function airHockey() {
     $('#view').html(cloneHtmlTemplate('template-air-hockey'));
+};
+
+function equipment() {
+    $('#view').html(cloneHtmlTemplate('template-equipment'));
 };
 
 /**
