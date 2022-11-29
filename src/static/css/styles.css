@@ -193,7 +193,7 @@ button[data-controls="next"] {
     padding: 0;
     overflow: hidden;
     max-width: 350px;
-    max-height: 250px;
+    max-height: 210px;
     margin: 5px;
     border: 2px solid black;
     border-radius: 10px;
