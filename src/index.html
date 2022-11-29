@@ -23,13 +23,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
     <script src="./static/js/router.js" defer></script>
     <script src="./static/js/app.js" defer></script>
     <script src="./static/js/util-fetch.js" defer></script>
     <script src="./static/js/userSys/getLanes.js" defer> </script>
     <script src="./static/js/userSys/getTables.js"></script>
-
+    <script src="./static/js/adminSys/EquipmentService.js"></script>
 </head>
 <body>
     <header>
@@ -410,8 +409,64 @@
         <template id="template-equipment">
             <div class="page-content" id="content">
                 <h2 class="text-center">Udstyrs Oversigt</h2>
-                <div id="table"></div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>aktivitet</th>
+                            <th>navn</th>
+                            <th>beskrivelse</th>
+                            <th>tilstand</th>
+                        </tr>
+                    </thead>
+                    <tbody id="equipments">
+                        
+                    </tbody>
+                </table>
+
+                <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
+                    <label for="name">navn</label>
+                    <input name="name" id="name" class="" type="text"></input>
+                  </form>
+                  <input class="btn btn-success" type="submit" id="btn" value="Tilføj" data-bs-dismiss="modal"></input>
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPost">
+                    Launch demo modal
+                  </button>
+                
+                <div class="modal" id="modalPost" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          
+
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </div>
+        </template>
+
+        <template id="template-equipment-item">
+            <tr>
+                <td><label class="id"></label></td>
+                <td><label class="activityType"></label></td>
+                <td><label class="name"></label></td>
+                <td><label class="description"></label></td>
+                <td><label class="condition"></label></td>
+            </tr>
         </template>
 
         <template id="template-table">

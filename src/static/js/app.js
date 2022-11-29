@@ -98,6 +98,7 @@ function diner() {
 
 function equipment() {
     $('#view').html(cloneHtmlTemplate('template-equipment'));
+    equipmentRenderer.updateUI();
 };
 
 /**
