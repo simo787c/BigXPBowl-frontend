@@ -15,8 +15,14 @@ class EquipmentRenderer {
             //iterate through each lane, then clone and assign a htmltemplate for it
             data.forEach(element => {
                 //id,activityType,name,description,condition
-                let clone = cloneHtmlTemplate("template-equipment-item")
-                let id = clone.querySelector(".id")
+                let clone = cloneHtmlTemplateTableTr("template-equipment-item")
+
+                clone.querySelector(".id").innerHTML += element.id;
+                clone.querySelector(".activityType").innerHTML += element.activityType;
+                clone.querySelector(".name").innerHTML += element.name;
+                clone.querySelector(".description").innerHTML += element.description;
+                clone.querySelector(".condition").innerHTML += element.condition;
+                /*let id = clone.querySelector(".id")
                 let activityType = clone.querySelector(".activityType")
                 let name = clone.querySelector(".name")
                 let desc = clone.querySelector(".description")
@@ -26,7 +32,7 @@ class EquipmentRenderer {
                 activityType.innerHTML += element.activityType
                 name.innerHTML += element.name
                 desc.innerHTML += element.description
-                condition.innerHTML += element.condition
+                condition.innerHTML += element.condition*/
 
                 equipments.appendChild(clone)
             });

@@ -30,6 +30,7 @@
     <script src="./static/js/userSys/getTables.js"></script>
     <script src="./static/js/adminSys/EquipmentService.js"></script>
 </head>
+
 <body>
     <header>
         <!-- Navbar -->
@@ -43,9 +44,8 @@
                 <!-- Vertical navbar -->
                 <div class="vertical-nav bg-white" id="sidebar">
                     <div class="py-4 px-3 mb-4 bg-light">
-                        <div class="media d-flex align-items-center"><img
-                                src="./static/media/bigxpbowl_logo.png" alt="..." width="65"
-                                class="mr-3 rounded-circle img-thumbnail shadow-sm">
+                        <div class="media d-flex align-items-center"><img src="./static/media/bigxpbowl_logo.png"
+                                alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
                             <div class="media-body">
                                 <h4 class="m-0">Person</h4>
                                 <p class="font-weight-light text-muted mb-0">Personale</p>
@@ -399,7 +399,7 @@
                 <div id="tables"></div>
             </div>
         </template>
-        
+
         <template id="template-diner">
             <div class="page-content" id="content">
                 <h2 class="text-center">Restaurant</h2>
@@ -410,7 +410,7 @@
             <div class="page-content" id="content">
                 <h2 class="text-center">Udstyrs Oversigt</h2>
 
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -420,46 +420,46 @@
                             <th>tilstand</th>
                         </tr>
                     </thead>
-                    <tbody id="equipments">
-                        
-                    </tbody>
+                    <tbody id="equipments"></tbody>
                 </table>
 
                 <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
                     <label for="name">navn</label>
                     <input name="name" id="name" class="" type="text"></input>
-                  </form>
-                  <input class="btn btn-success" type="submit" id="btn" value="Tilføj" data-bs-dismiss="modal"></input>
+                </form>
+                <input class="btn btn-success" type="submit" id="btn" value="Tilføj" data-bs-dismiss="modal"></input>
 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPost">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">
                     Launch demo modal
-                  </button>
-                
-                <div class="modal" id="modalPost" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Modal title</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalPost" tabindex="-1" aria-labelledby="modalPostLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="modalPostLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                
 
 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
             </div>
         </template>
 
-        <template id="template-equipment-item">
+        <!--<template id="template-equipment-item">
             <tr>
                 <td><label class="id"></label></td>
                 <td><label class="activityType"></label></td>
@@ -467,6 +467,14 @@
                 <td><label class="description"></label></td>
                 <td><label class="condition"></label></td>
             </tr>
+        </template>-->
+
+        <template id="template-equipment-item">
+            <td class="id"></td>
+            <td class="activityType"></td>
+            <td class="name"></td>
+            <td class="description"></td>
+            <td class="condition"></td>
         </template>
 
         <template id="template-table">
@@ -514,6 +522,7 @@
             </div>
         </template>
     </div>
+
 
     <!-- Footer-->
     <footer class="text-lg-start bg-dark text-muted fixed-bottom">

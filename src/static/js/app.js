@@ -68,6 +68,15 @@ function cloneHtmlTemplate(id) {
     return div
 }
 
+function cloneHtmlTemplateTableTr(id) {
+    let tr = document.createElement('tr');
+    //div.setAttribute('class', 'container');
+    const template = document.querySelector(`#${id}`);
+    const clone = template.content.cloneNode(true);
+    tr.appendChild(clone)
+    return tr
+}
+
 /**
  * Home route action.
  */
