@@ -29,6 +29,7 @@
     <script src="./static/js/userSys/getLanes.js" defer> </script>
     <script src="./static/js/userSys/getTables.js"></script>
     <script src="./static/js/adminSys/EquipmentService.js"></script>
+    <script src="./static/js/includeshtml.js"></script>
 </head>
 
 <body>
@@ -469,19 +470,14 @@
             </tr>
         </template>-->
 
-        <template id="template-equipment-item">
-            <td class="id"></td>
-            <td class="activityType"></td>
-            <td class="name"></td>
-            <td class="description"></td>
-            <td class="condition"></td>
-        </template>
+        
 
-        <template id="template-table">
-            <label id="tableNr"></label>
-            <label id="description"></label>
-            <label id="status"></label>
-        </template>
+        <!-- include template-equipment-item html -->
+        <div data-include="template-equipment-item"></div>
+
+
+        <!-- include template-table html -->
+        <div data-include="template-table"></div>
 
 
         <template id="template-image">

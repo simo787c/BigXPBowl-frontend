@@ -7,7 +7,6 @@ class TableRenderer {
         let tables = document.getElementById("tables");
 
         let data = await utilFetch.operationData("activities/airHockey","","","GET");
-
         
         try {
             //clear lanes div content
