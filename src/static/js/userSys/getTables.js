@@ -27,6 +27,15 @@ class TableRenderer {
                 let status = clone.querySelector(".status")
                 status.innerHTML += element.airHockeyTableStatus
                 */
+               
+               let status = clone.querySelector(".status")
+                if(element.airHockeyTableStatus){
+                    status.setAttribute("class", "bi bi-circle-fill text-success")
+                    status.innerHTML += "Ledig"
+                }else {
+                    status.setAttribute("class", "bi bi-circle-fill text-warning")
+                    status.innerHTML += "Fuldt booked"
+                }
 
                 tables.appendChild(clone)
             });
