@@ -383,15 +383,49 @@
         <template id="template-bowling">
             <div class="page-content" id="content">
                 <h2 class="text-center">Bowling</h2>
-                <div id="lanes"></div>
+
+
+                <!-- Card slider - tiny-slider 2 -->
+                <script src="./static/js/slider.js"></script>
+                <div class="bg-dark pt-3 pb-1 slider-style mx-auto">
+                    <div class="my-slider">
+                        <div class="">  
+                            <div class="" id="lanes"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
         </template>
 
         <template id="template-lane">
-            <label id="laneNr"></label>
-            <label id="description"></label>
-            <label id="status"></label>
+            <!-- <label id="description"></label> -->
+            <!-- <label id="status"></label> -->
+
+            
+                <div class="card container_foto">
+                    <a href="#/bowling">
+                        <img src="./static/media/Acitivities/bowlingImg.jpg" class="card-img-top frontpage-card-style"
+                            alt="...">
+                        <div class="ver_mas text-center">
+                            <span class="bi bi-calendar-plus d-flex align-self-center justify-content-center"></span>
+                        </div>
+                        <article class="text-left text-nowrap ">
+                            <h2 class="card-title" id="laneNr">Bowlinglane #</h2>
+                            <div class=" row row-cols-2 p-0">
+                                <h5 class="col p-0" id="description"></h5>
+                                <h5 class="col p-0 d-flex justify-content-end" id="status"></h5>
+                            </div>
+                            </article>
+                    </a>
+                </div>
+
+
         </template>
+
 
         <template id="template-air-hockey">
             <div class="page-content" id="content">
@@ -440,12 +474,11 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="modalPostLabel">Modal title</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
                             <div class="modal-body">
-                                
+
 
 
                             </div>

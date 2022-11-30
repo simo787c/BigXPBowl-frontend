@@ -21,7 +21,14 @@ class LanesRenderer {
                 
                 laneNr.innerHTML += element.bowlingLaneNr
                 desc.innerHTML += element.description
-                status.innerHTML += element.bowlingLaneStatus
+
+                if(element.bowlingLaneStatus){
+                    status.setAttribute("class", "text-success")
+                    status.innerHTML += "Ledig"
+                }else {
+                    status.setAttribute("class", "text-warning")
+                    status.innerHTML += "Fully booked"
+                }
 
                 lanes.appendChild(clone)
             });
