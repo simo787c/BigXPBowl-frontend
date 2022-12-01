@@ -8,6 +8,7 @@ class TableRenderer {
 
         let data = await utilFetch.operationData("activities/airHockey","","","GET");
 
+        document.getElementById("view").setAttribute("class", "container-fluid")
         
         try {
             //clear lanes div content
@@ -16,13 +17,19 @@ class TableRenderer {
             //iterate through each lane, then clone and assign a htmltemplate for it
             data.forEach(element => {
                 let clone = cloneHtmlTemplate("template-table")
-                let tableNr = clone.querySelector("#tableNr")
-                let desc = clone.querySelector("#description")
-                let status = clone.querySelector("#status")
-                
-                tableNr.innerHTML += element.airHockeyTableNr
-                desc.innerHTML += element.description
-                status.innerHTML += element.airHockeyTableStatus
+                clone.setAttribute("class", "col-auto d-flex justify-content-center")
+
+                clone.querySelector(".tableNr").innerHTML += element.airHockeyTableNr
+                clone.querySelector(".description").innerHTML += element.description
+               
+               let status = clone.querySelector(".status")
+                if(element.airHockeyTableStatus){
+                    status.setAttribute("class", "bi bi-circle-fill text-success")
+                    status.innerHTML += "Ledig"
+                }else {
+                    status.setAttribute("class", "bi bi-circle-fill text-warning")
+                    status.innerHTML += "Fuldt booked"
+                }
 
                 tables.appendChild(clone)
             });

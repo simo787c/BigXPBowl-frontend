@@ -82,6 +82,7 @@ function cloneHtmlTemplateTableTr(id) {
  */
 function home() {
     $('#view').html(cloneHtmlTemplate('template-home'));
+    document.getElementById("view").setAttribute("class", "container")
 }
 
 /**

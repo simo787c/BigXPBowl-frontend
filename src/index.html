@@ -28,6 +28,8 @@
     <script src="./static/js/util-fetch.js" defer></script>
     <script src="./static/js/userSys/getLanes.js" defer> </script>
     <script src="./static/js/userSys/getTables.js"></script>
+    <script src="./static/js/adminSys/EquipmentService.js"></script>
+    <script src="./static/js/includeshtml.js"></script>
 </head>
 
 <body>
@@ -382,22 +384,58 @@
         <template id="template-bowling">
             <div class="page-content" id="content">
                 <h2 class="text-center">Bowling</h2>
-                <div id="lanes"></div>
+
+
+                <!-- Card slider - tiny-slider 2 -->
+                <script src="./static/js/slider.js"></script>
+                <div class="bg-dark pt-3 pb-1 slider-style mx-auto">
+                    <div class="my-slider">
+                        <div class="">  
+                            <div class="" id="lanes"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
             </div>
         </template>
 
         <template id="template-lane">
-            <label id="laneNr"></label>
-            <label id="description"></label>
-            <label id="status"></label>
+            <!-- <label id="description"></label> -->
+            <!-- <label id="status"></label> -->
+
+            
+                <div class="card container_foto">
+                    <a href="#/bowling">
+                        <img src="./static/media/Acitivities/bowlingImg.jpg" class="card-img-top frontpage-card-style"
+                            alt="...">
+                        <div class="ver_mas text-center">
+                            <span class="bi bi-calendar-plus d-flex align-self-center justify-content-center"></span>
+                        </div>
+                        <article class="text-left text-nowrap ">
+                            <h2 class="card-title" id="laneNr">Bowlinglane #</h2>
+                            <div class=" row row-cols-2 p-0">
+                                <h5 class="col p-0" id="description"></h5>
+                                <h5 class="col p-0 d-flex justify-content-end" id="status"></h5>
+                            </div>
+                            </article>
+                    </a>
+                </div>
+
+
         </template>
+
 
         <template id="template-air-hockey">
             <div class="page-content" id="content">
                 <h2 class="text-center">Air Hockey</h2>
-                <div id="tables"></div>
+                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-4 d-flex justify-content-center" id="tables"></div>
             </div>
         </template>
+
+
 
         <template id="template-diner">
             <div class="page-content" id="content">
@@ -436,6 +474,8 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
+                            <div class="modal-body">
+
 
                             <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
                                 <div class="modal-body">
@@ -482,19 +522,14 @@
             </tr>
         </template>-->
 
-        <template id="template-equipment-item">
-            <td class="id"></td>
-            <td class="activityType"></td>
-            <td class="name"></td>
-            <td class="description"></td>
-            <td class="condition"></td>
-        </template>
+        
 
-        <template id="template-table">
-            <label id="tableNr"></label>
-            <label id="description"></label>
-            <label id="status"></label>
-        </template>
+        <!-- include template-equipment-item html -->
+        <div data-include="template-equipment-item"></div>
+
+
+        <!-- include template-table html -->
+        <div data-include="template-table"></div>
 
 
         <template id="template-image">
