@@ -21,6 +21,7 @@ class LanesRenderer {
 
                 clone.querySelector(".laneNr").innerHTML += element.bowlingLaneNr
                 clone.querySelector(".description").innerHTML += element.description
+                clone.querySelector("#btnId").value += element.bowlingLaneNr
 
                 let status = clone.querySelector(".status")
                 if (element.bowlingLaneStatus) {
@@ -28,7 +29,7 @@ class LanesRenderer {
                     status.innerHTML += "Ledig"
                 } else {
                     status.setAttribute("class", "bi bi-circle-fill text-warning")
-                    
+
                     status.innerHTML += "Fuldt booked"
                 }
 

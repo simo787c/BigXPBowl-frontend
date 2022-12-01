@@ -1,27 +1,29 @@
 <template id="template-lane">
-    <div class="card mb-4 rounded-3 shadow-sm" style="max-width: 350px;">
-        <div class="card-header py-3">
-            <div class="row row-cols-2">
-                <div class="col-9 col-xm-8 d-flex justify-content-center align-items-center pe-0">
-                    <h4 class="my-0 fw-normal laneNr">Bowlinglane #</h4>
-                </div>
-                <div class="col-2 p-0">
-                    <label class="activity-status p-0 m-0 d-flex justify-content-center align-items-center">
-                        <i class="status"></i>
-                    </label>
-                </div>
-            </div>
+  <div class="card mb-4 rounded-3 shadow-sm" style="max-width: 350px;">
+    <div class="card-header py-3">
+      <div class="row row-cols-2">
+        <div class="col-9 col-xm-8 d-flex justify-content-center align-items-center pe-0">
+          <h4 class="my-0 fw-normal laneNr">Bowlinglane #</h4>
         </div>
-        <div class="card-body">
-            <img src="./static/media/Acitivities/bowlingImg.jpg" alt="Lane" style="width: 100%;">
-            <h1 class="card-title pricing-card-title description"></h1>
+        <div class="col-2 p-0">
+          <label class="activity-status p-0 m-0 d-flex justify-content-center align-items-center">
+            <i class="status"></i>
+          </label>
         </div>
-        <div class="card-footer">
-            <button type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Book</button>
-        </div>
-    </div> 
+      </div>
+    </div>
+    <div class="card-body">
+      <img src="./static/media/Acitivities/bowlingImg.jpg" alt="Lane" style="width: 100%;">
+      <h1 class="card-title pricing-card-title description"></h1>
+    </div>
+    <div class="card-footer">
+      <button type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+        id="btnId" onclick="bookLane.modalBook(this.value)">Book</button>
+    </div>
+  </div>
   <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,8 +31,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
-          <label class="bowlingId"></label>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
