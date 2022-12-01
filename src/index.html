@@ -28,7 +28,6 @@
     <script src="./static/js/util-fetch.js" defer></script>
     <script src="./static/js/userSys/getLanes.js" defer> </script>
     <script src="./static/js/userSys/getTables.js"></script>
-    <script src="./static/js/adminSys/EquipmentService.js"></script>
 </head>
 
 <body>
@@ -423,14 +422,8 @@
                     <tbody id="equipments"></tbody>
                 </table>
 
-                <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
-                    <label for="name">navn</label>
-                    <input name="name" id="name" class="" type="text"></input>
-                </form>
-                <input class="btn btn-success" type="submit" id="btn" value="Tilføj" data-bs-dismiss="modal"></input>
-
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">
-                    Launch demo modal
+                    Nyt udstyr
                 </button>
 
                 <!-- Modal -->
@@ -440,23 +433,43 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="modalPostLabel">Modal title</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                
 
+                            <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
+                                <div class="modal-body">
+                                    <!-- activityType,name,description,condition -->
+                                    <label for="name" class="col">navn</label>
+                                    <input name="name" id="name" class="form-control col" type="text"></input>
+                                    <label for="activityType" class="col">Aktivitet</label>
+                                    <select name="activityType" id="activityType" class="form-control col">
+                                        <option value="Bowling">Bowling</option>
+                                        <option value="Air Hockey">Air Hockey</option>
+                                    </select>
+                                    <label for="description" class="col">Beskrivelse</label>
+                                    <input name="description" id="description" class="form-control col"
+                                        type="text"></input>
+                                    <label for="condition" class="col">Tilstand</label>
+                                    <select name="condition" id="condition" class="form-control col">
+                                        <option value="Ny">Ny</option>
+                                        <option value="Ødelagt">Ødelagt</option>
+                                        <option value="bestil forsyning">bestil forsyning</option>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <input class="btn btn-success" type="submit" id="btn" value="Tilføj"
+                                        data-bs-dismiss="modal"></input>
+                                </div>
+                            </form>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <script src="./static/js/adminSys/EquipmentService.js" defer></script>
         </template>
 
         <!--<template id="template-equipment-item">

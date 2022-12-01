@@ -61,10 +61,12 @@ const formPostEvent = document.querySelector("#formPost");
 // listening to when Post form get submitted
 formPostEvent.addEventListener("submit", event => {
     event.preventDefault();
+    console.log("TEST");
     const formData = new FormData(formPostEvent);
 
     const dataFromForm = Object.fromEntries(formData);
-    console.log(formData);
+    console.log(dataFromForm);
 
     utilFetch.operationData("equipment","",dataFromForm,"POST");
+    equipmentRenderer.updateUI();
 })
