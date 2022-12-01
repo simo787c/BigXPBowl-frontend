@@ -383,48 +383,11 @@
         <template id="template-bowling">
             <div class="page-content" id="content">
                 <h2 class="text-center">Bowling</h2>
-
-
-                <!-- Card slider - tiny-slider 2 -->
-                <script src="./static/js/slider.js"></script>
-                <div class="bg-dark pt-3 pb-1 slider-style mx-auto">
-                    <div class="my-slider">
-                        <div class="">  
-                            <div class="" id="lanes"></div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
+                <div class="row row-cols-sm-1 row-cols-md-2 row-cols-xl-4 d-flex justify-content-center" id="lanes"></div>
             </div>
         </template>
 
-        <template id="template-lane">
-            <!-- <label id="description"></label> -->
-            <!-- <label id="status"></label> -->
-
-            
-                <div class="card container_foto">
-                    <a href="#/bowling">
-                        <img src="./static/media/Acitivities/bowlingImg.jpg" class="card-img-top frontpage-card-style"
-                            alt="...">
-                        <div class="ver_mas text-center">
-                            <span class="bi bi-calendar-plus d-flex align-self-center justify-content-center"></span>
-                        </div>
-                        <article class="text-left text-nowrap ">
-                            <h2 class="card-title" id="laneNr">Bowlinglane #</h2>
-                            <div class=" row row-cols-2 p-0">
-                                <h5 class="col p-0" id="description"></h5>
-                                <h5 class="col p-0 d-flex justify-content-end" id="status"></h5>
-                            </div>
-                            </article>
-                    </a>
-                </div>
-
-
-        </template>
+        
 
 
         <template id="template-air-hockey">
@@ -476,39 +439,40 @@
                             <div class="modal-body">
 
 
-                            <form class="form" id="formPost" method="POST" enctype="application/x-www-form-urlencoded">
-                                <div class="modal-body">
-                                    <!-- activityType,name,description,condition -->
-                                    <label for="name" class="col">navn</label>
-                                    <input name="name" id="name" class="form-control col" type="text"></input>
-                                    <label for="activityType" class="col">Aktivitet</label>
-                                    <select name="activityType" id="activityType" class="form-control col">
-                                        <option value="Bowling">Bowling</option>
-                                        <option value="Air Hockey">Air Hockey</option>
-                                    </select>
-                                    <label for="description" class="col">Beskrivelse</label>
-                                    <input name="description" id="description" class="form-control col"
-                                        type="text"></input>
-                                    <label for="condition" class="col">Tilstand</label>
-                                    <select name="condition" id="condition" class="form-control col">
-                                        <option value="Ny">Ny</option>
-                                        <option value="Ødelagt">Ødelagt</option>
-                                        <option value="bestil forsyning">bestil forsyning</option>
-                                    </select>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <input class="btn btn-success" type="submit" id="btn" value="Tilføj"
-                                        data-bs-dismiss="modal"></input>
-                                </div>
-                            </form>
+                                <form class="form" id="formPost" method="POST"
+                                    enctype="application/x-www-form-urlencoded">
+                                    <div class="modal-body">
+                                        <!-- activityType,name,description,condition -->
+                                        <label for="name" class="col">navn</label>
+                                        <input name="name" id="name" class="form-control col" type="text"></input>
+                                        <label for="activityType" class="col">Aktivitet</label>
+                                        <select name="activityType" id="activityType" class="form-control col">
+                                            <option value="Bowling">Bowling</option>
+                                            <option value="Air Hockey">Air Hockey</option>
+                                        </select>
+                                        <label for="description" class="col">Beskrivelse</label>
+                                        <input name="description" id="description" class="form-control col"
+                                            type="text"></input>
+                                        <label for="condition" class="col">Tilstand</label>
+                                        <select name="condition" id="condition" class="form-control col">
+                                            <option value="Ny">Ny</option>
+                                            <option value="Ødelagt">Ødelagt</option>
+                                            <option value="bestil forsyning">bestil forsyning</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <input class="btn btn-success" type="submit" id="btn" value="Tilføj"
+                                            data-bs-dismiss="modal"></input>
+                                    </div>
+                                </form>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <script src="./static/js/adminSys/EquipmentService.js" defer></script>
+                <script src="./static/js/adminSys/EquipmentService.js" defer></script>
         </template>
 
         <!--<template id="template-equipment-item">
@@ -521,11 +485,14 @@
             </tr>
         </template>-->
 
-        
+
 
         <!-- include template-equipment-item html -->
         <div data-include="template-equipment-item"></div>
 
+
+        <!-- include template-lane html -->
+        <div data-include="template-lane"></div>
 
         <!-- include template-table html -->
         <div data-include="template-table"></div>
