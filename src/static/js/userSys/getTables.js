@@ -18,15 +18,9 @@ class TableRenderer {
             data.forEach(element => {
                 let clone = cloneHtmlTemplate("template-table")
                 clone.setAttribute("class", "col-auto d-flex justify-content-center")
-                //clone.setAttribute("style", "width: 250px")
 
                 clone.querySelector(".tableNr").innerHTML += element.airHockeyTableNr
                 clone.querySelector(".description").innerHTML += element.description
-
-                /*
-                let status = clone.querySelector(".status")
-                status.innerHTML += element.airHockeyTableStatus
-                */
                
                let status = clone.querySelector(".status")
                 if(element.airHockeyTableStatus){
