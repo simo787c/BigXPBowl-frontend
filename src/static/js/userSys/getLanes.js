@@ -40,5 +40,11 @@ class LanesRenderer {
             console.log(error)
         }
     }
+    modalBook(id) {
+        //let bowlingId = document.getElementById("bowlingId")
+        //bowlingId.value = id;
+        $('#bowlingId').val(id);//
+        console.log(id)
+    }
 }
 var lanesRenderer = new LanesRenderer;
