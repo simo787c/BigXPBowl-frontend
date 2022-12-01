@@ -13,7 +13,7 @@ class TableRenderer {
         document.getElementById("page-title").innerHTML += "<br>"+ new Date().toLocaleString("da-DK").split(" ") [0];
         
         try {
-            //clear lanes div content
+            //clear Table div content
             tables.innerHTML = ""
 
             //iterate through each lane, then clone and assign a htmltemplate for it
