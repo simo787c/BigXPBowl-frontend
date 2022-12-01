@@ -21,61 +21,103 @@
         id="btnId" onclick="bookLane.modalBook(this.value)">Book</button>
     </div>
   </div>
-  
+
   <!-- Modal TimeSlot -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+  <div class="modal fade text-light" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Bowling bane # - Tidspunkt</h1>
+          <h1 class="modal-title fs-5 modalTimeSlotTitle" id="staticBackdropLabel"></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
 
-          <input type="text" id="bowlingId" value="">
+          <input type="text" id="bowlingId" value="" hidden readonly>
 
-          <label for="test"></label>
-          <input type="text" name="" id="test">
+          <div class="container-fluid">
+            <div class="row row-cols-1">
+              <div class="col mb-4">
+                <label for="nrOfParticipants" title="max. 8 personer pr. bane">Antal personer</label><br>
+                <input type="text" name="nrOfParticipants" id="nrOfParticipants" min="1" max="8"
+                  placeholder="Min. 1 - Max. 8" title="max. 8 personer pr. bane" required>
+              </div>
 
-          <div class="mb-3">
-            <label for="timeSlot" class="form-label"></label>
-            <select class="form-select form-select-lg" name="timeSlot" id="timeSlot">
-              <option id="timeSlot">Vælg</option>
-            </select>
+              <hr>
+
+              <div class="col">
+                <input type='radio' name='duration' value="1" id="1hour">
+                <label for="1Hour">1 time</label>
+              </div>
+              <div class="col mb-3">
+                <input type='radio' name='duration' value="2">
+                <label for="2Hour">2 timer</label>
+              </div>
+
+              <hr>
+
+              <div class="col my-2 d-flex align-content-center">
+                <label for="timeSlotSelect" class="form-label"></label>
+                <select class="form-select form-select-lg" name="timeSlotSelect" id="timeSlotSelect">
+                  <!-- <option id="timeSlot">Vælg</option> -->
+                  <option value="">Vælg...</option>
+                </select>
+              </div>
+            </div>
           </div>
-
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal"
-          id="btnId" onclick="bookLane.modalBook(this.value)" id="bowlingId">Næste</button>
+          <button type="button" class="btn btn-secondary" onclick="timeSlotRenderer.modalClosedRemoveElement()"
+            data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal" id="btnId"
+            onclick="bookLane.bowlingTimeSlot(this.value)" id="bowlingId">Næste</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Modal Booking -->
-  <div class="modal fade" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal fade text-light" id="bookingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Booking - Information</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <form class="form" id="formBookingPost" method="POST" enctype="multipart/form-data">
+          <div class="modal-body">
 
-          <input type="text" id="bowlingId" value="">
+            <input type="text" id="bowlingId" value="" hidden readonly>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Næste</button>
-        </div>
+            <div class="container-fluid">
+              <div class="row row-cols-1">
+                <div class="col d-flex justify-content-center">
+                  <fieldset>
+                    <legend>E-mail</legend>
+                    <input type="email" class="bookingInfo-style" id="email" value="" placeholder="Test@Mail.dk"
+                      required>
+                  </fieldset>
+                </div>
+                <div class="col d-flex justify-content-center">
+                  <fieldset>
+                    <legend>Dato</legend>
+                    <input type="date" class="bookingInfo-style" id="startDate" value="" required>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input type="submit" class="btn btn-primary" value="Book"></input>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 
+  
 
 </template>

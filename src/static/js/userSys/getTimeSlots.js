@@ -1,7 +1,15 @@
 class TimeSlotRenderer {
 
-    constructor() {
+    constructor(data) {
+        this.data = data;
+        this.getTimeSlot()
     }
+
+    async getTimeSlot() {
+        this.data = await utilFetch.operationData("timeSlots/", "", "", "GET");
+        //this.timeSlotUpdateUI()
+    }
+    
 
     async updateUI() {
         let timeSlot = document.getElementById("timeSlot");
@@ -30,11 +38,62 @@ class TimeSlotRenderer {
             console.log(error)
         }
     }
-   /*  modalBook(id) {
-        //let bowlingId = document.getElementById("bowlingId")
-        //bowlingId.value = id;
-        $('#bowlingId').val(id);//
-        console.log(id)
-    } */
+
+    // timeSlotUpdateUI() {
+    //     document.getElementById("1hour").setAttribute("checked", "checked")
+    //     $('input[type=radio][name=duration]').change(function () {
+    //         if (this.value == '1') {
+    //             let target = $('select[name="timeSlotSelect"]');
+    //             let options = `<option value="21:00" id="timeSlot12">21:00</option>`;
+    //             //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+    //             target.append(options);
+    //         }
+    //         else if (this.value == '2') {
+    //             $('#timeSlot12').remove();
+    //         }
+    //     });
+
+    //     /* for (let dataIndex in this.data) {
+    //         let element = this.data[dataIndex];
+
+    //         let target = $('select[name="timeSlotSelect"]');
+    //         let options = `<option value="${element.startTime}">${element.startTime}</option>`;
+    //         target.append(options);
+    //     } */
+    //     this.data.forEach(element => {
+    //         let target = $('select[name="timeSlotSelect"]');
+    //         let options = `<option value="${element.startTime}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
+    //         //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+    //         target.append(options);
+    //     });
+    // }
+
+    timeSlotUpdateUI() {
+        document.getElementById("1hour").setAttribute("checked", "checked")
+        $('input[type=radio][name=duration]').change(function () {
+            if (this.value == '1') {
+                let target = $('select[name="timeSlotSelect"]');
+                let options = `<option value="12" id="timeSlot12">21:00</option>`;
+                //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+                target.append(options);
+            }
+            else if (this.value == '2') {
+                $('#timeSlot12').remove();
+            }
+        });
+
+        this.data.forEach(element => {
+            let target = $('select[name="timeSlotSelect"]');
+            let options = `<option value="${element.timeSlotId}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
+            //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+            target.append(options);
+        });
+    }
+
+    modalClosedRemoveElement() {
+        this.data.forEach(element => {
+            $("#timeSlot" + element.timeSlotId).remove();
+        });
+    }
 }
 var timeSlotRenderer = new TimeSlotRenderer;
