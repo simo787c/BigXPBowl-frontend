@@ -16,8 +16,8 @@ class TimeSlotRenderer {
 
             //iterate through each lane, then clone and assign a htmltemplate for it
             data.forEach(element => {
-                let clone = cloneHtmlTemplate("template-timeSlot")
-                clone.setAttribute("class", "col-auto d-flex justify-content-center")
+                //let clone = cloneHtmlTemplate("template-timeSlot")
+                //clone.setAttribute("class", "col-auto d-flex justify-content-center")
 
                 clone.querySelector(".startTime").innerHTML += element.startTime
                 clone.querySelector(".endTime").innerHTML += element.endTime
