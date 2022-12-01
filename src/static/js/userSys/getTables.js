@@ -9,6 +9,8 @@ class TableRenderer {
         let data = await utilFetch.operationData("activities/airHockey","","","GET");
 
         document.getElementById("view").setAttribute("class", "container-fluid")
+
+        document.getElementById("page-title").innerHTML += "<br>"+ new Date().toLocaleString("da-DK").split(" ") [0];
         
         try {
             //clear lanes div content
