@@ -119,7 +119,8 @@ body {
     background: linear-gradient(to right, #599fd9, #c2e59c);
     min-height: 100vh;
     overflow-x: hidden;
-}
+} 
+
 
 .separator {
     margin: 3rem 0;

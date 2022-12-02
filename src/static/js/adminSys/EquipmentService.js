@@ -7,6 +7,8 @@ class EquipmentRenderer {
         let equipments = document.getElementById("equipments");
 
         let data = await utilFetch.operationData("equipment","","","GET");
+        document.getElementById("view").setAttribute("class", "text-bg-dark")
+        document.getElementsByTagName("")
         console.log(data);
         try {
             //clear equipments div content
