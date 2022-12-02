@@ -46,7 +46,7 @@ class BookingsRenderer {
         }
     }
 
-    updateCalendarUI() {
+    /*updateCalendarUI() {
         let bookingCalendar = document.getElementById("booking-calendar");
         document.getElementById("view").setAttribute("class", "container-fluid")
 
@@ -61,6 +61,6 @@ class BookingsRenderer {
         } catch (error) {
             console.log(error)
         }
-    }
+    }*/
 }
 var bookingsRenderer = new BookingsRenderer;

@@ -1,41 +1,50 @@
 <template id="template-booking-calendar">
-    <link rel="stylesheet" href="./static/css/calendar-style.css">
-
+    
+    <h2>Kalender</h2>
     <div class="container-fluid">
         <div class="calendar" id="calendar-app">
             <div class="calendar--day-view" id="day-view">
-                <span class="day-view-exit" id="day-view-exit">×</span>
+                <span class="day-view-exit" id="day-view-exit">&times;</span>
                 <span class="day-view-date" id="day-view-date">MAY 29 2016</span>
                 <div class="day-view-content">
                     <div class="day-highlight">
                         You <span class="day-events" id="day-events">had no events for today</span>. &nbsp;
-                        <span tabindex="0" onkeyup="if(event.keyCode != 13) return; this.click();" class="day-events-link" id="add-event" data-date="">Add a new event?</span>
+                        <span tabindex="0" onkeyup="if(event.keyCode != 13) return; this.click();"
+                            class="day-events-link" id="add-event" data-date>Add a new event?</span>
                     </div>
                     <div class="day-add-event" id="add-day-event-box" data-active="false">
                         <div class="row-calender">
                             <div class="half">
                                 <label class="add-event-label">
                                     Name of event
-                                    <input type="text" class="add-event-edit add-event-edit--long" placeholder="New event" id="input-add-event-name">
+                                    <input type="text" class="add-event-edit add-event-edit--long"
+                                        placeholder="New event" id="input-add-event-name">
 
                                 </label>
                             </div>
                             <div class="qtr">
                                 <label class="add-event-label">
                                     Start Time
-                                    <input type="text" class="add-event-edit" placeholder="8:15" id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                                    <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-start-ampm" data-options="a,p,am,pm">
+                                    <input type="text" class="add-event-edit" placeholder="8:15"
+                                        id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12"
+                                        data-format="datetime">
+                                    <input type="text" class="add-event-edit" placeholder="am"
+                                        id="input-add-event-start-ampm" data-options="a,p,am,pm">
                                 </label>
                             </div>
                             <div class="qtr">
                                 <label class="add-event-label">
                                     End Time
-                                    <input type="text" class="add-event-edit" placeholder="9" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
-                                    <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">
+                                    <input type="text" class="add-event-edit" placeholder="9"
+                                        id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12"
+                                        data-format="datetime">
+                                    <input type="text" class="add-event-edit" placeholder="am"
+                                        id="input-add-event-end-ampm" data-options="a,p,am,pm">
                                 </label>
                             </div>
                             <div class="half">
-                                <a onkeyup="if(event.keyCode != 13) return; this.click();" tabindex="0" id="add-event-save" class="event-btn--save event-btn">save</a>
+                                <a onkeyup="if(event.keyCode != 13) return; this.click();" tabindex="0"
+                                    id="add-event-save" class="event-btn--save event-btn">save</a>
                                 <a tabindex="0" id="add-event-cancel" class="event-btn--cancel event-btn">cancel</a>
                             </div>
                         </div>
@@ -51,9 +60,9 @@
             </div>
             <div class="calendar--view" id="calendar-view">
                 <div class="cview__month">
-                    <span class="cview__month-last" id="calendar-month-last" data-date="Tue Nov 01 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">← Nov</span>
-                    <span class="cview__month-current cview__month-reset cview__month-activate" id="calendar-month" data-date="Fri Dec 02 2022 12:21:48 GMT+0100 (Centraleuropæisk normaltid)">Dec 2022</span>
-                    <span class="cview__month-next" id="calendar-month-next" data-date="Sun Jan 01 2023 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">Jan →</span>
+                    <span class="cview__month-last" id="calendar-month-last">Apr</span>
+                    <span class="cview__month-current" id="calendar-month">May</span>
+                    <span class="cview__month-next" id="calendar-month-next">Jun</span>
                 </div>
                 <div class="cview__header">Sun</div>
                 <div class="cview__header">Mon</div>
@@ -62,10 +71,11 @@
                 <div class="cview__header">Thu</div>
                 <div class="cview__header">Fri</div>
                 <div class="cview__header">Sat</div>
-                <div class="calendar--view" id="dates"><div class="cview--spacer"></div><div class="cview--spacer"></div><div class="cview--spacer"></div><div class="cview--spacer"></div><div class="cview--date" data-date="Thu Dec 01 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">1</div><div class="cview--date today" data-date="Fri Dec 02 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">2</div><div class="cview--date" data-date="Sat Dec 03 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">3</div><div class="cview--date" data-date="Sun Dec 04 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">4</div><div class="cview--date" data-date="Mon Dec 05 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">5</div><div class="cview--date" data-date="Tue Dec 06 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">6</div><div class="cview--date" data-date="Wed Dec 07 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">7</div><div class="cview--date" data-date="Thu Dec 08 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">8</div><div class="cview--date" data-date="Fri Dec 09 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">9</div><div class="cview--date" data-date="Sat Dec 10 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">10</div><div class="cview--date" data-date="Sun Dec 11 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">11</div><div class="cview--date" data-date="Mon Dec 12 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">12</div><div class="cview--date" data-date="Tue Dec 13 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">13</div><div class="cview--date" data-date="Wed Dec 14 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">14</div><div class="cview--date" data-date="Thu Dec 15 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">15</div><div class="cview--date" data-date="Fri Dec 16 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">16</div><div class="cview--date" data-date="Sat Dec 17 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">17</div><div class="cview--date" data-date="Sun Dec 18 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">18</div><div class="cview--date" data-date="Mon Dec 19 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">19</div><div class="cview--date" data-date="Tue Dec 20 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">20</div><div class="cview--date" data-date="Wed Dec 21 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">21</div><div class="cview--date" data-date="Thu Dec 22 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">22</div><div class="cview--date" data-date="Fri Dec 23 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">23</div><div class="cview--date" data-date="Sat Dec 24 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">24</div><div class="cview--date" data-date="Sun Dec 25 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">25</div><div class="cview--date" data-date="Mon Dec 26 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">26</div><div class="cview--date" data-date="Tue Dec 27 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">27</div><div class="cview--date" data-date="Wed Dec 28 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">28</div><div class="cview--date" data-date="Thu Dec 29 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">29</div><div class="cview--date" data-date="Fri Dec 30 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">30</div><div class="cview--date" data-date="Sat Dec 31 2022 00:00:00 GMT+0100 (Centraleuropæisk normaltid)">31</div></div>
+                <div class="calendar--view" id="dates">
+                </div>
             </div>
             <div class="footer">
-                <span><span id="footer-date" class="footer__link">Today is Dec 2</span></span>
+                <span><span id="footer-date" class="footer__link">Today is May 30</span></span>
             </div>
         </div>
     </div>
@@ -565,4 +575,5 @@
         var calendar = new CalendarApp();
         console.log(calendar);
     </script>
+
 </template>
