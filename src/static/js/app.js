@@ -9,6 +9,8 @@ var htmlTemplateCache = new Map()
  * Route template constants.
  */
 const ROUTE_TEMPLATE_KEY_HOME = 'home'
+const ROUTE_TEMPLATE_KEY_BOOKING = 'booking'
+const ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR = 'booking/calendar'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
 const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
 const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
@@ -22,6 +24,8 @@ const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
  * Route constants.
  */
 const ROUTE_HOME = '/'
+const ROUTE_BOOKING = '/booking'
+const ROUTE_BOOKING_CALENDAR = '/booking/calendar'
 const ROUTE_ABOUT = '/about'
 const ROUTE_BOWLING = '/bowling'
 const ROUTE_AIRHOCKEY = '/airHockey'
@@ -35,6 +39,8 @@ const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
  * Defines the routing templates used.
  */
 template(ROUTE_TEMPLATE_KEY_HOME, home)
+template(ROUTE_TEMPLATE_KEY_BOOKING, booking)
+template(ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR, booking_calendar)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
 template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
 template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
@@ -48,6 +54,8 @@ template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
  * Defines the #/... url routes and the templates they match..
  */
 route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
+route(ROUTE_BOOKING, ROUTE_TEMPLATE_KEY_BOOKING);
+route(ROUTE_BOOKING_CALENDAR, ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
 route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
 route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
@@ -84,6 +92,16 @@ function home() {
     $('#view').html(cloneHtmlTemplate('template-home'));
     document.getElementById("view").setAttribute("class", "container")
 }
+
+function booking() {
+    $('#view').html(cloneHtmlTemplate('template-booking'));
+    bookingsRenderer.updateUI();
+   }
+
+   function booking_calendar() {
+    $('#view').html(cloneHtmlTemplate('template-booking-calendar'));
+    bookingCalendarRenderer.updateUI();
+   }
 
 /**
  * About route action.
