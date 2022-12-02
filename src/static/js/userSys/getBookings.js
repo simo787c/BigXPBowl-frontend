@@ -45,5 +45,22 @@ class BookingsRenderer {
             console.log(error)
         }
     }
+
+    /*updateCalendarUI() {
+        let bookingCalendar = document.getElementById("booking-calendar");
+        document.getElementById("view").setAttribute("class", "container-fluid")
+
+        try {
+            //clear bookings div content
+            bookingCalendar.innerHTML = ""
+
+            let clone = cloneHtmlTemplate("template-booking-calendar")
+
+            bookingCalendar.appendChild(clone)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }*/
 }
 var bookingsRenderer = new BookingsRenderer;
