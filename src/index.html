@@ -33,6 +33,7 @@
     <script src="./static/js/userSys/getTimeSlots.js" defer></script>
     <script src="./static/js/userSys/getBookings.js"></script>
     <script src="./static/js/includeshtml.js"></script>
+    <script src="./static/js/sub-menu.js"></script>
 
 </head>
 
@@ -67,9 +68,11 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#/booking" class="nav-link text-dark font-italic">
-                                Booking
-                            </a>
+                            <a class="sub-btn nav-link text-dark font-italic bg-light">Booking</a>
+                            <ul class="sub-menu">
+                               <li><a href="#/booking" class="sub-item nav-link text-dark font-italic bg-light">Search Booking</a></li>
+                               <li><a href="#/bookingCalendar" class="sub-item nav-link text-dark font-italic bg-light">Booking Calendar</a></li>
+                            </ul>
                         </li>
                         <!--<li class="nav-item">
                             <a href="#" class="nav-link text-dark font-italic">
