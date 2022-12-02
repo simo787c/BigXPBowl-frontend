@@ -22,51 +22,50 @@ class EquipmentRenderer {
                 clone.querySelector(".name").innerHTML += element.name;
                 clone.querySelector(".description").innerHTML += element.description;
                 clone.querySelector(".condition").innerHTML += element.condition;
-                /*let id = clone.querySelector(".id")
-                let activityType = clone.querySelector(".activityType")
-                let name = clone.querySelector(".name")
-                let desc = clone.querySelector(".description")
-                let condition = clone.querySelector(".condition")
-                
-                id.innerHTML += element.id
-                activityType.innerHTML += element.activityType
-                name.innerHTML += element.name
-                desc.innerHTML += element.description
-                condition.innerHTML += element.condition*/
+                clone.querySelector(".btn").value+= element.id;
+                clone.setAttribute("id",element.id);
 
                 equipments.appendChild(clone)
             });
-            
-            /* for (const row of data){
-                const rowElement = document.createElement("tr");
-
-                for (const cellText of row){
-                    const cellElement = document.createElement("td");
-
-                    cellElement.textContent = cellText;
-                    rowElement.appendChild(cellElement);
-                }
-            } 
-
-            equipments.appendChild(rowElement);*/
 
         } catch (error) {
             console.log(error)
         }
     }
+    
+    deleteEquipment(id) {
+        if (this.confirmDelete()) {
+            utilFetch.operationData("equipment/",id,"","DELETE");
+            //Remove deleted element from UI
+            $('#' + id).remove();
+            console.log('Delete was successful');
+        } else {
+            console.log('Delete was cancelled');
+        }
+    }
+    //Confirm prompt
+    confirmDelete() {
+        return confirm('Er du sikker på du vil slette?');
+    }
 }
+    
 var equipmentRenderer = new EquipmentRenderer;
 
 const formPostEvent = document.querySelector("#formPost");
+
 // listening to when Post form get submitted
 formPostEvent.addEventListener("submit", event => {
     event.preventDefault();
-    console.log("TEST");
     const formData = new FormData(formPostEvent);
 
     const dataFromForm = Object.fromEntries(formData);
     console.log(dataFromForm);
 
-    utilFetch.operationData("equipment","",dataFromForm,"POST");
+    if(formPostEvent.value == "POST"){
+        utilFetch.operationData("equipment","",dataFromForm,"POST");
+    }else if(formPostEvent.value == "PATCH"){
+        utilFetch.operationData("equipment/",id,dataFromForm,"PATCH");
+    }
     equipmentRenderer.updateUI();
 })
+
