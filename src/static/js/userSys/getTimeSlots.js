@@ -7,9 +7,10 @@ class TimeSlotRenderer {
 
     async getTimeSlot() {
         this.data = await utilFetch.operationData("timeSlots/", "", "", "GET");
+        this.bookingData = await utilFetch.operationData("bookings", "", "", "GET");
         //this.timeSlotUpdateUI()
     }
-    
+
 
     async updateUI() {
         let timeSlot = document.getElementById("timeSlot");
@@ -39,37 +40,14 @@ class TimeSlotRenderer {
         }
     }
 
-    // timeSlotUpdateUI() {
-    //     document.getElementById("1hour").setAttribute("checked", "checked")
-    //     $('input[type=radio][name=duration]').change(function () {
-    //         if (this.value == '1') {
-    //             let target = $('select[name="timeSlotSelect"]');
-    //             let options = `<option value="21:00" id="timeSlot12">21:00</option>`;
-    //             //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
-    //             target.append(options);
-    //         }
-    //         else if (this.value == '2') {
-    //             $('#timeSlot12').remove();
-    //         }
-    //     });
-
-    //     /* for (let dataIndex in this.data) {
-    //         let element = this.data[dataIndex];
-
-    //         let target = $('select[name="timeSlotSelect"]');
-    //         let options = `<option value="${element.startTime}">${element.startTime}</option>`;
-    //         target.append(options);
-    //     } */
-    //     this.data.forEach(element => {
-    //         let target = $('select[name="timeSlotSelect"]');
-    //         let options = `<option value="${element.startTime}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
-    //         //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
-    //         target.append(options);
-    //     });
-    // }
-
-    timeSlotUpdateUI() {
-        document.getElementById("1hour").setAttribute("checked", "checked")
+    timeSlotUpdateUI(id) {
+        for (let j = 1; j < timeSlotRenderer.data.length + 1; j++) {
+            $('#timeSlot' + j).remove();
+        }
+        document.getElementById("activityDate").value = ""//new Date("2022-12-04").toISOString().substring(0,10)
+        document.getElementById("1hour").checked = true
+        document.getElementById("2hour").checked = false
+        $('input[type=radio][name=duration]').unbind('change');
         $('input[type=radio][name=duration]').change(function () {
             if (this.value == '1') {
                 let target = $('select[name="timeSlotSelect"]');
@@ -88,6 +66,58 @@ class TimeSlotRenderer {
             //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
             target.append(options);
         });
+
+        $('input[type=date][name=activityDate]').unbind('change'); // unbind is added!!!
+        $('input[type=date][name=activityDate]').change(function () { // Need unbind or it will be called twice
+            let bookingOnDate = false;
+
+            for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) {
+                if (this.value == timeSlotRenderer.bookingData[i].activityDate.split("T")[0]) {
+                    for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) {
+                        for (let j = 0; j < timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList.length; j++) {
+                            $('#timeSlot' + timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].timeSlotId).prop("disabled", false);
+                        }
+                    }
+                    bookingOnDate = true;
+                    break;
+                } else {
+                    bookingOnDate = false;
+                }
+            }
+
+            if (bookingOnDate) {
+                for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) {
+                    if (this.value == timeSlotRenderer.bookingData[i].activityDate.split("T")[0]) {
+                        for (let j = 0; j < timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList.length; j++) {
+                            //console.log(timeSlotRenderer.data[i])//.bowlingTimeSlotJoinedTableList[j].timeSlotId)
+                            //console.log(timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].timeSlotId)
+                            if (id == timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].bowlingId) {
+                                //$('#timeSlot' + timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].timeSlotId).remove();
+                                $('#timeSlot' + timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].timeSlotId).attr("disabled", "disabled");
+                                console.log("Remove Element")
+                            }
+                        }
+                    }
+                }
+            } else {
+                for (let j = 1; j < timeSlotRenderer.data.length + 1; j++) {
+                    $('#timeSlot' + j).remove();
+                }
+                timeSlotRenderer.data.forEach(element => {
+                    let target = $('select[name="timeSlotSelect"]');
+                    let options = `<option value="${element.timeSlotId}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
+                    //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+                    target.append(options);
+                });
+            }
+        });
+
+        /* this.data.forEach(element => {
+            let target = $('select[name="timeSlotSelect"]');
+            let options = `<option value="${element.timeSlotId}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
+            //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
+            target.append(options);
+        }); */
     }
 
     modalClosedRemoveElement() {

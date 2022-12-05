@@ -100,7 +100,8 @@ function booking() {
 
    function booking_calendar() {
     $('#view').html(cloneHtmlTemplate('template-booking-calendar'));
-    bookingCalendarRenderer.updateUI();
+    document.getElementById("view").setAttribute("class", "container-fluid")
+    // bookingCalendarRenderer.updateUI();
    }
 
 /**

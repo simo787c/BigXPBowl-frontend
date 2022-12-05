@@ -7,6 +7,7 @@
     background: #ffc107;
     padding: 60px 40px 80px 40px;
     width: 95%;
+    min-width: 400px;
     max-width: 600px;
     height: 500px;
     border-radius: 5px;
@@ -112,7 +113,7 @@
 .add-event-edit {
     display: block;
     margin: 4px 0;
-    max-width: 45%;
+    max-width: 70%;
     border-bottom: 2px solid #fff;
     font-size: 18px;
     font-weight: 800;
@@ -120,7 +121,7 @@
 }
 
 .add-event-edit--long {
-    max-width: 65%;
+    max-width: 90%;
 }
 
 input.add-event-edit {
@@ -177,7 +178,7 @@ input.add-event-edit:-ms-input-placeholder {
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    width: 65px;
+    width: 80px;
     margin: 5px 0;
     text-align: center;
 }
@@ -333,7 +334,9 @@ input.add-event-edit:-ms-input-placeholder {
     width: 100%;
 }
 
-.cview__month {
+.cview__month,
+.cview__week,
+.cview__day {
     width: 100%;
     text-align: center;
     font-weight: 800;
@@ -346,6 +349,10 @@ input.add-event-edit:-ms-input-placeholder {
     flex-wrap: nowrap;
     align-items: baseline;
     justify-content: space-around;
+}
+
+.cview__day {
+    min-height: 240px;
 }
 
 .cview__month-last,
@@ -462,4 +469,126 @@ input.add-event-edit:-ms-input-placeholder {
     cursor: pointer;
     padding: 2px 5px;
     border-bottom: 1px solid #fff;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+}
+
+.grid-item {
+    width: 35px;
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: center;
+}
+
+.today {
+    border: 2px solid black;
+}
+
+.not-current {
+    color: rgba(116, 116, 116, 0.5);
+}
+
+
+.add-event-input {
+    display: block;
+    /* margin: 4px 0; */
+    max-width: 20%;
+    border-bottom: 2px solid #fff;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+
+input.add-event-input {
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    outline: none;
+    font: inherit;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+input.add-event-input::-webkit-input-placeholder {
+    color: #fff;
+}
+
+input.add-event-input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff;
+}
+
+input.add-event-input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff;
+}
+
+input.add-event-input:-ms-input-placeholder {
+    color: #fff;
+}
+
+/* Input name */
+.add-event-name {
+    display: block;
+    margin: 4px 0;
+    max-width: 50%;
+    border-bottom: 2px solid #fff;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+
+input.add-event-name {
+    border: none;
+    border-bottom: 2px solid #fff;
+    background: transparent;
+    outline: none;
+    font: inherit;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.add-event-name--error,
+input.add-event-name--error {
+    border-color: #ff5151;
+    animation: shake 300ms 1 forwards;
+}
+
+input.add-event-name::-webkit-input-placeholder {
+    color: #fff;
+}
+
+input.add-event-name:-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff;
+}
+
+input.add-event-name::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff;
+}
+
+input.add-event-name:-ms-input-placeholder {
+    color: #fff;
+}
+
+.add-new-event-name {
+    width: 150px;
+}
+
+.add-event-start-time {
+    width: 70px;
+}
+
+.add-event-end-time {
+    width: 70px;
+}
+
+.add-event-btn {
+    width: 70px;
 }

@@ -39,19 +39,38 @@
             <div class="row row-cols-1">
               <div class="col mb-4">
                 <label for="nrOfParticipants" title="max. 8 personer pr. bane">Antal personer</label><br>
-                <input type="text" name="nrOfParticipants" id="nrOfParticipants" min="1" max="8"
+                <input type="text" class="form-control" name="nrOfParticipants" id="nrOfParticipants" min="1" max="8"
                   placeholder="Min. 1 - Max. 8" title="max. 8 personer pr. bane" required>
               </div>
 
               <hr>
 
-              <div class="col">
+              <div class="col mb-4">
+                <label for="timeSlotSelect" class="form-label">Dato</label>
+                <input type="date" class="form-control" name="activityDate" id="activityDate">
+              </div>
+
+              <hr>
+
+              <!-- <div class="col">
                 <input type='radio' name='duration' value="1" id="1hour">
                 <label for="1Hour">1 time</label>
               </div>
               <div class="col mb-3">
                 <input type='radio' name='duration' value="2">
                 <label for="2Hour">2 timer</label>
+              </div> -->
+
+              <div class="col mb-4">
+                <label>Vælg varighed</label>
+                <div class="switch-field">
+                  <!-- 1 time - default -->
+                  <input type="radio" name="duration" id="1hour" value="1" />
+                  <label for="1hour" style="height: 25px">1 time</label>
+                  <!-- 2 timer -->
+                  <input type="radio" name="duration" id="2hour" value="2" />
+                  <label for="2hour" style="height: 25px">2 timer</label>
+                </div>
               </div>
 
               <hr>
@@ -60,7 +79,7 @@
                 <label for="timeSlotSelect" class="form-label"></label>
                 <select class="form-select form-select-lg" name="timeSlotSelect" id="timeSlotSelect">
                   <!-- <option id="timeSlot">Vælg</option> -->
-                  <option value="">Vælg...</option>
+                  <option value="">Vælg tidspunkt...</option>
                 </select>
               </div>
             </div>
@@ -85,39 +104,38 @@
           <h1 class="modal-title fs-5" id="staticBackdropLabel">Booking - Information</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form class="form" id="formBookingPost" method="POST" enctype="multipart/form-data">
-          <div class="modal-body">
+        <!-- <form class="form" id="formBookingPost"> -->
+        <div class="modal-body">
 
-            <input type="text" id="bowlingId" value="" hidden readonly>
+          <input type="text" id="bowlingId" value="" hidden readonly>
 
-            <div class="container-fluid">
-              <div class="row row-cols-1">
-                <div class="col d-flex justify-content-center">
-                  <fieldset>
-                    <legend>E-mail</legend>
-                    <input type="email" class="bookingInfo-style" id="email" value="" placeholder="Test@Mail.dk"
-                      required>
-                  </fieldset>
-                </div>
-                <div class="col d-flex justify-content-center">
+          <div class="container-fluid">
+            <div class="row row-cols-1">
+              <div class="col d-flex justify-content-center">
+                <fieldset>
+                  <legend>E-mail</legend>
+                  <input type="email" class="bookingInfo-style" id="email" value="" placeholder="Test@Mail.dk" required>
+                </fieldset>
+              </div>
+              <!-- <div class="col d-flex justify-content-center">
                   <fieldset>
                     <legend>Dato</legend>
                     <input type="date" class="bookingInfo-style" id="startDate" value="" required>
                   </fieldset>
-                </div>
-              </div>
+                </div> -->
             </div>
+          </div>
 
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <input type="submit" class="btn btn-primary" value="Book"></input>
-          </div>
-        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <input type="submit" class="btn btn-primary" value="Book" onclick="bookLane.createBooking()"></input>
+        </div>
+        <!-- </form> -->
       </div>
     </div>
   </div>
 
-  
+
 
 </template>
