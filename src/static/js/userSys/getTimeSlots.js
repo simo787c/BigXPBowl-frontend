@@ -54,9 +54,29 @@ class TimeSlotRenderer {
                 let options = `<option value="12" id="timeSlot12">21:00</option>`;
                 //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
                 target.append(options);
+
+                for (let j = 0; j < timeSlotRenderer.bookingData.length; j++) {
+                    for (let k = 0; k < timeSlotRenderer.bookingData[j].bowlingTimeSlotJoinedTableList.length; k++) {
+                        //$('#timeSlot' + timeSlotRenderer.bookingData[k].bowlingTimeSlotJoinedTableList[k].timeSlotId).prop("disabled", false);
+                        const element = timeSlotRenderer.bookingData[j].bowlingTimeSlotJoinedTableList[k].timeSlotId;
+                        console.log("Element: " + element)
+                        if (element != 1) {
+                            $('#timeSlot' + (element - 1)).prop("disabled", false);
+                        }
+                    }
+                }
             }
             else if (this.value == '2') {
                 $('#timeSlot12').remove();
+                for (let i = 0; i < timeSlotRenderer.data.length; i++) {
+                    if ($('#timeSlot' + timeSlotRenderer.data[i].timeSlotId).is(":disabled")) {
+                        console.log("Disabled?")
+                        if ($('#timeSlot' + timeSlotRenderer.data[i].timeSlotId) != $('#timeSlot1')) {
+                            $('#timeSlot' + (timeSlotRenderer.data[i].timeSlotId - 1)).attr("disabled", "disabled")
+                            //console.log(timeSlotRenderer.data[i].timeSlotId)
+                        }
+                    }
+                }
             }
         });
 
@@ -71,11 +91,11 @@ class TimeSlotRenderer {
         $('input[type=date][name=activityDate]').change(function () { // Need unbind or it will be called twice
             let bookingOnDate = false;
 
-            for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) {
+            for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) { //TODO Check this again
                 if (this.value == timeSlotRenderer.bookingData[i].activityDate.split("T")[0]) {
-                    for (let i = 0; i < timeSlotRenderer.bookingData.length; i++) {
-                        for (let j = 0; j < timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList.length; j++) {
-                            $('#timeSlot' + timeSlotRenderer.bookingData[i].bowlingTimeSlotJoinedTableList[j].timeSlotId).prop("disabled", false);
+                    for (let j = 0; j < timeSlotRenderer.bookingData.length; j++) {
+                        for (let k = 0; k < timeSlotRenderer.bookingData[j].bowlingTimeSlotJoinedTableList.length; k++) {
+                            $('#timeSlot' + timeSlotRenderer.bookingData[k].bowlingTimeSlotJoinedTableList[k].timeSlotId).prop("disabled", false);
                         }
                     }
                     bookingOnDate = true;
