@@ -18,19 +18,19 @@ class BookingsRenderer {
             data.forEach(async (element) => {
                 let clone = cloneHtmlTemplateTableTr("template-booking-item")
                 clone.querySelector(".email").innerHTML += element.email
-                clone.querySelector(".startDate").innerHTML += element.startDate
+                clone.querySelector(".activityDate").innerHTML += element.activityDate.split("T")[0]
                 clone.querySelector(".activityDuration").innerHTML += element.activityDuration
                 if (element.bowlingTimeSlotJoinedTableList != "") {
                     for (let i = 0; i < element.bowlingTimeSlotJoinedTableList.length; i++) {
-                        clone.querySelector(".bowlingTimeSlotJoinedTableList").innerHTML += element.bowlingTimeSlotJoinedTableList[i].bowlingTimeSlotJTId + "<br>"
+                        clone.querySelector(".bowlingId").innerHTML += element.bowlingTimeSlotJoinedTableList[i].bowlingId + "<br>"
                         // Syntax for Get
                         let bowlingData = await utilFetch.operationData("activities/bowling/", element.bowlingTimeSlotJoinedTableList[i].timeSlotId, "", "GET");
-                        clone.querySelector(".bowlingTimeSlotJoinedTableList").innerHTML += await bowlingData.name + "<br>"
+                        clone.querySelector(".activityType").innerHTML += await bowlingData.name + "<br>"
                         //let timeslot = utilFetch.operationData("timeSlots/", element.bowlingTimeSlotJoinedTableList[i].timeSlotId, "", "GET");
                         let timeslot = await utilFetch.operationData("timeSlots/", "", "", "GET");
                         for (let j = 0; j < timeslot.length; j++) {
                             if (element.bowlingTimeSlotJoinedTableList[i].timeSlotId == timeslot[j].timeSlotId) {
-                                clone.querySelector(".bowlingTimeSlotJoinedTableList").innerHTML += timeslot[j].startTime  + "<br>"
+                                clone.querySelector(".timeSlot").innerHTML += timeslot[j].startTime  + "<br>"
 
                             }
                         }
