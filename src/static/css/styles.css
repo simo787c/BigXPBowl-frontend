@@ -363,3 +363,8 @@ legend {
 .switch-field label:last-of-type {
     border-radius: 0 4px 4px 0;
 }
+
+/* TimeSlot when disabled */
+.timeSlots:disabled {
+    background-color: rgb(221, 221, 221);
+}

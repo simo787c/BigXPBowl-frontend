@@ -23,7 +23,6 @@ class BookLane {
         let nrOfParticipants = document.getElementById("nrOfParticipants").value
         this.bowlingId = bowlingId;
         this.timeSlotId = timeSlotId;
-        //document.getElementById("2hour").checked
 
         if (nrOfParticipants == 0) {
             nrOfParticipants = 1;
@@ -37,31 +36,6 @@ class BookLane {
         ])
         const timeSlotDataJS = Object.fromEntries(timeSlotEntries);
 
-        let timeSlotEntriesTest = new Map([
-            ['timeSlotId', timeSlotId]
-        ])
-        for (let i = 1; i < (bowlingData.timeSlots.length); i++) {
-            const element = bowlingData.timeSlots[i];
-            timeSlotEntriesTest.set(element)
-        }
-        const timeSlotDataJSTest = Object.fromEntries(timeSlotEntriesTest);
-
-        console.log(timeSlotDataJS)
-        console.log(timeSlotDataJSTest)
-
-        let timeSlotEntries2Hour = new Map([]);
-        if (document.getElementById("2hour").checked) {
-            timeSlotEntries2Hour = new Map([
-                ['timeSlotId', (parseInt(timeSlotId) + 1)]
-            ])
-        }
-        const timeSlotDataJS2Hour = Object.fromEntries(timeSlotEntries2Hour);
-
-        //CLG
-        console.log(bowlingData.timeSlots)
-
-        let existingTimeSlotData = bowlingData.timeSlots;
-
         const bowling = new Map([
             ['bowlingId', bowlingId],
             ['name', bowlingData.name],
@@ -69,15 +43,30 @@ class BookLane {
             ['nrOfParticipants', nrOfParticipants],
             ['bowlingLaneNr', bowlingData.bowlingLaneNr],
             ['bowlingLaneStatus', bowlingData.bowlingLaneStatus],
-            ['timeSlots', [existingTimeSlotData, timeSlotDataJS, timeSlotDataJS2Hour]],
+            ['timeSlots', [timeSlotDataJS]],
         ]);
+
+        if (document.getElementById("2hour").checked) {
+            let timeSlotEntries2Hour = new Map([
+                ['timeSlotId', (parseInt(timeSlotId) + 1)]
+            ])
+            const timeSlotDataJS2Hour = Object.fromEntries(timeSlotEntries2Hour);
+            bowling.get("timeSlots").push(timeSlotDataJS2Hour)
+        }
+        
+        for (let i = 0; i < ( bowlingData.timeSlots.length); i++) {
+            const element = bowlingData.timeSlots[i];
+            console.log(element)
+            bowling.get("timeSlots").push(element)
+            console.log( bowling.get("timeSlots"))
+        }
+
+        // Bowling Data that will get send to patch
         const bowlingDataJS = Object.fromEntries(bowling);
-
-        console.log(bowlingDataJS)
-
         // Syntax for PATCH
         await utilFetch.operationData("activities/bowling/", bowlingId, bowlingDataJS, "PATCH");
-        console.log(bowlingId + ", " + timeSlotId)
+        // CLG
+        console.log("Bowling ID: " + bowlingId + ", TimeSlot ID: " + timeSlotId)
         // Get
         this.BowlingTimeSlotData = await utilFetch.operationData("activities/BowlingTimeSlot/", "", "", "GET");
     }
@@ -104,6 +93,15 @@ class BookLane {
             ['activityDuration', document.querySelector('input[name="duration"]:checked').value + " time(r)"],
             ['bowlingTimeSlotJoinedTableList', [bowlingTimeSlotJTData]]
         ])
+
+        if (document.getElementById("2hour").checked) {
+            let bowlingTimeSlotJT2Hour = new Map([
+                ['bowlingTimeSlotJTId', (parseInt(bowlingTimeSlotId) + 1)]
+            ])
+            const bowlingTimeSlotJTData2Hour = Object.fromEntries(bowlingTimeSlotJT2Hour);
+            booking.get("bowlingTimeSlotJoinedTableList").push(bowlingTimeSlotJTData2Hour)
+        }
+
         const bookingData = Object.fromEntries(booking);
 
         // Syntax for Post
