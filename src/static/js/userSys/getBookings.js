@@ -3,10 +3,10 @@ class BookingsRenderer {
     constructor() {
     }
 
-    async updateUI() {
+    async updateUI(query) {
         let bookings = document.getElementById("bookings");
-
-        let data = await utilFetch.operationData("bookings", "", "", "GET");
+        //if nothing is searched, every entry will match the empty query
+        let data = await utilFetch.operationData("bookings/search?query=" + query, "", "", "GET");
 
         document.getElementById("view").setAttribute("class", "container-fluid")
 

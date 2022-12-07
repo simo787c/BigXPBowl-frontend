@@ -95,7 +95,7 @@ function home() {
 
 function booking() {
     $('#view').html(cloneHtmlTemplate('template-booking'));
-    bookingsRenderer.updateUI();
+    bookingsRenderer.updateUI("");
    }
 
    function booking_calendar() {
