@@ -82,7 +82,7 @@ class TimeSlotRenderer {
 
         this.data.forEach(element => {
             let target = $('select[name="timeSlotSelect"]');
-            let options = `<option value="${element.timeSlotId}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
+            let options = `<option value="${element.timeSlotId}" class="timeSlots" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
             //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
             target.append(options);
         });
@@ -131,13 +131,6 @@ class TimeSlotRenderer {
                 });
             }
         });
-
-        /* this.data.forEach(element => {
-            let target = $('select[name="timeSlotSelect"]');
-            let options = `<option value="${element.timeSlotId}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
-            //let options = `<option value="${element.startTime}">${element.startTime + "-" + element.endTime}</option>`;
-            target.append(options);
-        }); */
     }
 
     modalClosedRemoveElement() {
