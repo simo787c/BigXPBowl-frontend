@@ -15,6 +15,7 @@ class BookLane {
         modalTitle.innerHTML = "Bowling bane #" + id + ' - Tidspunkt'
 
         timeSlotRenderer.timeSlotUpdateUI(id)
+        this.validateInput();
     }
 
     async bowlingTimeSlot() {
@@ -53,12 +54,12 @@ class BookLane {
             const timeSlotDataJS2Hour = Object.fromEntries(timeSlotEntries2Hour);
             bowling.get("timeSlots").push(timeSlotDataJS2Hour)
         }
-        
-        for (let i = 0; i < ( bowlingData.timeSlots.length); i++) {
+
+        for (let i = 0; i < (bowlingData.timeSlots.length); i++) {
             const element = bowlingData.timeSlots[i];
             console.log(element)
             bowling.get("timeSlots").push(element)
-            console.log( bowling.get("timeSlots"))
+            console.log(bowling.get("timeSlots"))
         }
 
         // Bowling Data that will get send to patch
@@ -109,6 +110,27 @@ class BookLane {
     }
 
     //TODO Update booking & Cancel booking
+
+    validateInput() {
+        const btnNext = document.getElementById('btnId2');
+        btnNext.disabled = true
+
+        const nrOfParticipantsInput = document.querySelector('#nrOfParticipants');
+        const activityDateInput = document.querySelector('#activityDate');
+        const timeSlotInput = document.querySelector('#timeSlotSelect');
+
+        nrOfParticipantsInput.addEventListener('input', updateValue);
+        activityDateInput.addEventListener('input', updateValue);
+        timeSlotInput.addEventListener('input', updateValue);
+
+        function updateValue() {
+            if ((parseInt(nrOfParticipantsInput.value) <= 8 && (parseInt(nrOfParticipantsInput.value) > 0)) && activityDateInput.value !== "" && timeSlotInput.value !== "") {
+                btnNext.disabled = false
+            } else {
+                btnNext.disabled = true
+            }
+        }
+    }
 }
 var bookLane = new BookLane;
 
