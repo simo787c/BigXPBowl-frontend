@@ -38,10 +38,9 @@ class BookLane {
         const timeSlotDataJS = Object.fromEntries(timeSlotEntries);
 
         const bowling = new Map([
-            ['bowlingId', bowlingId],
+            ['activityId', bowlingId],
             ['name', bowlingData.name],
             ['description', bowlingData.description],
-            ['nrOfParticipants', nrOfParticipants],
             ['bowlingLaneNr', bowlingData.bowlingLaneNr],
             ['bowlingLaneStatus', bowlingData.bowlingLaneStatus],
             ['timeSlots', [timeSlotDataJS]],
@@ -76,6 +75,7 @@ class BookLane {
     async createBooking() {
         let bowlingTimeSlotId;
         let email = document.getElementById("email").value;
+        let nrOfParticipants = document.getElementById("nrOfParticipants").value
 
         for (let i = 0; i < this.BowlingTimeSlotData.length; i++) {
             if (this.BowlingTimeSlotData[i].bowlingId == bookLane.bowlingId && this.BowlingTimeSlotData[i].timeSlotId == bookLane.timeSlotId) {
@@ -92,6 +92,7 @@ class BookLane {
             ['email', email],
             ['activityDate', document.querySelector('input[name="activityDate"]').value],
             ['activityDuration', document.querySelector('input[name="duration"]:checked').value + " time(r)"],
+            ['nrOfParticipants', nrOfParticipants],
             ['bowlingTimeSlotJoinedTableList', [bowlingTimeSlotJTData]]
         ])
 
