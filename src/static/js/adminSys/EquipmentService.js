@@ -79,12 +79,13 @@ formPostEvent.addEventListener("submit", event => {
 
     const dataFromForm = Object.fromEntries(formData);
     console.log(dataFromForm);
-    //console.log(formPostEvent.method);
-    if(formPostEvent.method == "POST"){
-        console.log("POST IF");
+    console.log("Type: " + formPostEvent.method);
+    // We can write method type in uppercase but it gives in lowercase
+    if(formPostEvent.method == "post"){
+        console.log("IF POST");
         utilFetch.operationData("equipment","",dataFromForm,"POST");
-    }else if(formPostEvent.method == "PATCH"){
-        console.log("PATCH");
+    }else if(formPostEvent.method == "get"){ // 
+        console.log("IF PATCH");
         utilFetch.operationData("equipment/",id,dataFromForm,"PATCH");
     }
     console.log(formPostEvent);
