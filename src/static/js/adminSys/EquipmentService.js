@@ -54,7 +54,7 @@ class EquipmentRenderer {
     async editButtonClick(id) {
         console.log("edit clicked " + id);
         //$('#formPost').attr('method','PATCH')
-        document.getElementById("formPost").method = "PATCH";
+        document.getElementById("equipmentMethodType").value = "PATCH";
         //console.log(document.querySelector("#formPost").method);
         let data = await utilFetch.operationData("equipment/", id, "", "GET");
 
@@ -83,7 +83,7 @@ class EquipmentRenderer {
     createButtonClick() {
         console.log("create clicked");
         //$('#formPost').attr('method','POST')
-        document.getElementById("formPost").method = "POST";
+        document.getElementById("equipmentMethodType").value = "POST";
         //console.log(document.querySelector("#formPost").method);
     }
 }
@@ -95,20 +95,19 @@ const formPostEvent = document.querySelector("#formPost");
 // listening to when Post form get submitted
 formPostEvent.addEventListener("submit", event => {
     event.preventDefault();
-    const formData = new FormData(formPostEvent);
+    let equipmentMethodType = document.getElementById("equipmentMethodType").value
 
+    const formData = new FormData(formPostEvent);
     const dataFromForm = Object.fromEntries(formData);
-    console.log(dataFromForm);
-    console.log("Type: " + formPostEvent.method);
+
     // We can write method type in uppercase but it gives in lowercase
-    if (formPostEvent.method == "post") {
+    if (equipmentMethodType == "POST") {
         console.log("IF POST");
         utilFetch.operationData("equipment", "", dataFromForm, "POST");
-    } else if (formPostEvent.method == "get") { //in the html form, it only has post and get, we dont use the functionality
+    } else if (equipmentMethodType == "PATCH") { //in the html form, it only has post and get, we dont use the functionality
         console.log("IF PATCH");
         utilFetch.operationData("equipment/", id, dataFromForm, "PATCH");
     }
-    console.log(formPostEvent);
     equipmentRenderer.updateUI();
 })
 
