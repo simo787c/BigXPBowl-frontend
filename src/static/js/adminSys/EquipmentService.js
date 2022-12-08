@@ -100,11 +100,13 @@ formPostEvent.addEventListener("submit", event => {
     const formData = new FormData(formPostEvent);
     const dataFromForm = Object.fromEntries(formData);
 
-    // We can write method type in uppercase but it gives in lowercase
+    //we made a workaround to use a field in form with the method type, as method attribute on form is dumb
+    // We can write method type in uppercase but it gives in lowercase (deprecated)
+    //in the html form, it only has post and get, we dont use the functionality (deprecated)
     if (equipmentMethodType == "POST") {
         console.log("IF POST");
         utilFetch.operationData("equipment", "", dataFromForm, "POST");
-    } else if (equipmentMethodType == "PATCH") { //in the html form, it only has post and get, we dont use the functionality
+    } else if (equipmentMethodType == "PATCH") {
         console.log("IF PATCH");
         utilFetch.operationData("equipment/", id, dataFromForm, "PATCH");
     }
