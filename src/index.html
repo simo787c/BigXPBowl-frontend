@@ -32,7 +32,7 @@
     <script src="./static/js/userSys/bookLane.js"></script>
     <script src="./static/js/userSys/booking.js"></script>
     <script src="./static/js/userSys/getTimeSlots.js" defer></script>
-    <script src="./static/js/userSys/getBookings.js"></script>
+    <!-- <script src="./static/js/userSys/getBookings.js"></script> -->
     <script src="./static/js/includeshtml.js"></script>
     <script src="./static/js/sub-menu.js"></script>
 
@@ -375,14 +375,15 @@
 
                 <input type="text" placeholder="Søg.." id="searchBar" ></input>
                 <button type="submit" id="searchButton" onclick="bookingsRenderer.updateUI(document.getElementById('searchBar').value)"><i class="bi bi-search"></i></button>
-
-                <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
-                    <thead>
-                        <tr>
-                            <th>Mail</th>
-                            <th>Dato for Aktivitet</th>
-                            <th>Aktivitets længde</th>
-                            <th>Bane nummer</th>
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
+                        <thead>
+                            <tr>
+                                <th>Mail</th>
+                                <th>Dato for Aktivitet</th>
+                                <th>Aktivitets længde</th>
+                                <th>Antal deltagere</th>
+                                <th>Bane nummer</th>
                             <th>Aktivitets type</th>
                             <th>Tidspunkt</th>
                             <th></th>
@@ -390,6 +391,7 @@
                     </thead>
                     <tbody id="bookings"></tbody>
                 </table> 
+            </div>
             </div>
 
 <!--Edit Booking Modal-->
@@ -403,11 +405,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form" id="formPost" method="PATCH"
+                        <form class="form" id="formEdit" method="POST"
                             enctype="application/x-www-form-urlencoded">
                             <div class="modal-body">
                                 <!-- only Mail can be edited! -->
-                                <input hidden name="id" id="id" readonly></input>
+                                <input hidden name="bookingRowId" id="bookingRowId" readonly></input>
 
                                 <label for="email" class="col">Email</label>
                                 <input name="email" id="email" class="form-control col" type="text"></input>
@@ -418,8 +420,8 @@
                                 <label for="activityDuration" class="col">Aktivitetslængde</label>
                                 <input name="activityDuration" id="activityDuration" class="form-control col" type="text"></input>
 
-                                <label for="activityId" class="col">Bane Nummmer</label>
-                                <input name="activityId" id="activityId" class="form-control col" type="text"></input>
+                                <label for="nrOfParticipants" class="col">Antal Deltagere</label>
+                                <input name="nrOfParticipants" id="nrOfParticipants" class="form-control col" type="text"></input>
 
                                 
 
@@ -435,6 +437,7 @@
                     </div>
                 </div>
             </div>
+            <script src="./static/js/userSys/getBookings.js"></script>
         </div>
 
 
