@@ -23,6 +23,7 @@ class TableRenderer {
 
                 clone.querySelector(".tableNr").innerHTML += element.airHockeyTableNr
                 clone.querySelector(".description").innerHTML += element.description
+                clone.querySelector("#bookTableBtnId").value += element.airHockeyTableNr
                
                let status = clone.querySelector(".status")
                 if(element.airHockeyTableStatus){
