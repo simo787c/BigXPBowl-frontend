@@ -4,14 +4,15 @@
     <td class="name"></td>
     <td class="description"></td>
     <td class="condition"></td>
-    <td>
-        <button type="button" class="w-100 btn btn-lg btn-primary editButton" value="" 
+    <td class="Options text-center">
+        <button type="button" class="btn btn-sm btn-primary my-1 editButton" value="" 
         onclick="equipmentRenderer.editButtonClick(this.value)" data-bs-toggle="modal" data-bs-target="#modalPost">
-            Rediger
+        <i class="bi bi-pencil-square">
+        </i>
         </button>
-        <button type="button" class="btn btn-md btn-danger max-w-25 deleteButton" value=""
+        <button type="button" class="btn btn-sm btn-danger my-1 deleteButton" value=""
             onclick="equipmentRenderer.deleteEquipment(this.value)">
-            <i class="bi bi-trash fs-5"></i>
+            <i class="bi bi-trash-fill"></i>
         </button>
     </td>
 </template>

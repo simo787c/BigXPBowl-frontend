@@ -56,11 +56,12 @@ class EquipmentRenderer {
         console.log("edit clicked " + id);
         //$('#formPost').attr('method','PATCH')
         document.getElementById("equipmentMethodType").value = "PATCH";
+        document.getElementById("submitButton").value = "Gem";
         //console.log(document.querySelector("#formPost").method);
         let data = await utilFetch.operationData("equipment/", id, "", "GET");
 
         document.getElementById("id").value = data.id;
-        //document.getElementById("activityType").value += data.activityType;
+        document.getElementById("activityType").value = data.activityType;
         document.getElementById("name").value = data.name;
         document.getElementById("description").value = data.description;
         
@@ -83,6 +84,7 @@ class EquipmentRenderer {
 
     createButtonClick() {
         console.log("create clicked");
+        document.getElementById("submitButton").value = "Tilføj";
         //$('#formPost').attr('method','POST')
         document.getElementById("equipmentMethodType").value = "POST";
         //console.log(document.querySelector("#formPost").method);
