@@ -21,7 +21,7 @@
         </div>
         <div class="card-footer">
             <button type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop" id="bookTableBtnId" onclick="bookings.modalBook(this.value)">Book</button>
+                data-bs-target="#staticBackdrop" id="bookTableBtnId" onclick="bookings.modalBook(this.value, 'airHockey')">Book</button>
         </div>
     </div>
 
@@ -102,7 +102,7 @@
                 <!-- <form class="form" id="formBookingPost"> -->
                 <div class="modal-body">
 
-                    <input type="text" id="bowlingId" value="" hidden readonly>
+                    <input type="text" id="activityId" value="" hidden readonly>
 
                     <div class="container-fluid">
                         <div class="row row-cols-1">

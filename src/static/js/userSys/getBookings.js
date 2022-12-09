@@ -20,6 +20,7 @@ class BookingsRenderer {
                 clone.querySelector(".email").innerHTML += element.email
                 clone.querySelector(".activityDate").innerHTML += element.activityDate.split("T")[0]
                 clone.querySelector(".activityDuration").innerHTML += element.activityDuration
+                clone.querySelector(".nrOfParticipants").innerHTML += element.nrOfParticipants
                 if (element.bowlingTimeSlotJoinedTableList != "" || element.airHockeyTimeSlotJoinedTableList != "") {
                     /*for (let i = 0; i < element.bowlingTimeSlotJoinedTableList.length; i++) {
                         clone.querySelector(".bowlingId").innerHTML += element.bowlingTimeSlotJoinedTableList[i].bowlingId + "<br>"
@@ -93,14 +94,12 @@ class BookingsRenderer {
         console.log("edit clicked " + id);
         let data = await utilFetch.operationData("bookings/", id, "", "GET");
 
-        document.getElementById("id").value = data.id;
+        document.getElementById("bookingRowId").value = data.bookingId;
         document.getElementById('email').value = data.email;
         document.getElementById('activityDate').value = data.activityDate.split('T')[0];
         document.getElementById('activityDuration').value = data.activityDuration;
-        document.getElementById('activityId').value = data.activityId;
-        document.getElementById('activityType').value = data.activityType;
-        document.getElementById('timeSlot').value = data.timeSlot;
-
+        document.getElementById('nrOfParticipants').value = data.nrOfParticipants;
+        
 
 
     }
@@ -123,3 +122,28 @@ class BookingsRenderer {
     }*/
 }
 var bookingsRenderer = new BookingsRenderer;
+
+const formEditEvent = document.querySelector("#formEdit");
+
+// listening to when Post form get submitted
+formEditEvent.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(formEditEvent);
+    // Syntax for Get
+    let bookingData = await utilFetch.operationData("bookings/", formData.get("bookingRowId"), "", "GET");
+
+    const dataEntity = new Map([
+        ["bookingId", formData.get("bookingRowId")],
+        ["email", formData.get("email")],
+        ["activityDate", formData.get("activityDate")],
+        ["activityDuration", formData.get("activityDuration")],
+        ["nrOfParticipants", formData.get("nrOfParticipants")],
+        ["bowlingTimeSlotJoinedTableList", bookingData.bowlingTimeSlotJoinedTableList],
+        ["airHockeyTimeSlotJoinedTableList", bookingData.airHockeyTimeSlotJoinedTableList],
+    ])
+    const dataFromForm = Object.fromEntries(dataEntity);
+    console.log(dataFromForm)
+    await utilFetch.operationData("bookings/", formData.get("bookingRowId"), dataFromForm, "PATCH");
+    bookingsRenderer.updateUI("");
+})
