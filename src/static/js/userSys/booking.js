@@ -150,44 +150,6 @@ class Bookings {
         await utilFetch.operationData("bookings", "", bookingData, "POST");
     }
 
-    async createBooking() {
-        let bowlingTimeSlotId;
-        let email = document.getElementById("email").value;
-        let nrOfParticipants = document.getElementById("nrOfParticipants").value
-
-        for (let i = 0; i < this.BowlingTimeSlotData.length; i++) {
-            if (this.BowlingTimeSlotData[i].bowlingId == bookLane.bowlingId && this.BowlingTimeSlotData[i].timeSlotId == bookLane.timeSlotId) {
-                bowlingTimeSlotId = this.BowlingTimeSlotData[i].bowlingTimeSlotJTId
-            }
-        }
-
-        const bowlingTimeSlotJT = new Map([
-            ['bowlingTimeSlotJTId', bowlingTimeSlotId]
-        ])
-        const bowlingTimeSlotJTData = Object.fromEntries(bowlingTimeSlotJT);
-
-        const booking = new Map([
-            ['email', email],
-            ['activityDate', document.querySelector('input[name="activityDate"]').value],
-            ['activityDuration', document.querySelector('input[name="duration"]:checked').value + " time(r)"],
-            ['nrOfParticipants', nrOfParticipants],
-            ['bowlingTimeSlotJoinedTableList', [bowlingTimeSlotJTData]]
-        ])
-
-        if (document.getElementById("2hour").checked) {
-            let bowlingTimeSlotJT2Hour = new Map([
-                ['bowlingTimeSlotJTId', (parseInt(bowlingTimeSlotId) + 1)]
-            ])
-            const bowlingTimeSlotJTData2Hour = Object.fromEntries(bowlingTimeSlotJT2Hour);
-            booking.get("bowlingTimeSlotJoinedTableList").push(bowlingTimeSlotJTData2Hour)
-        }
-
-        const bookingData = Object.fromEntries(booking);
-
-        // Syntax for Post
-        await utilFetch.operationData("bookings", "", bookingData, "POST");
-    }
-
     //TODO Update booking & Cancel booking
 
     validateInput() {
