@@ -20,7 +20,7 @@ class BookingsRenderer {
                 clone.querySelector(".email").innerHTML += element.email
                 clone.querySelector(".activityDate").innerHTML += element.activityDate.split("T")[0]
                 clone.querySelector(".activityDuration").innerHTML += element.activityDuration
-                if (element.bowlingTimeSlotJoinedTableList != "") {
+                if (element.bowlingTimeSlotJoinedTableList != "" || element.airHockeyTimeSlotJoinedTableList != "") {
                     /*for (let i = 0; i < element.bowlingTimeSlotJoinedTableList.length; i++) {
                         clone.querySelector(".bowlingId").innerHTML += element.bowlingTimeSlotJoinedTableList[i].bowlingId + "<br>"
                         // Syntax for Get
