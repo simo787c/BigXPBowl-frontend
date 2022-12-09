@@ -61,7 +61,7 @@ class BookingsRenderer {
             }
             clone.querySelector(".activityId").innerHTML += activityId + "<br>"
             // Syntax for Get
-            let activityData = await utilFetch.operationData(activityType, activityJT[i].timeSlotId, "", "GET");
+            let activityData = await utilFetch.operationData(activityType, activityId, "", "GET");
             clone.querySelector(".activityType").innerHTML += await activityData.name + "<br>"
             let timeslot = await utilFetch.operationData("timeSlots/", "", "", "GET");
             for (let j = 0; j < timeslot.length; j++) {
