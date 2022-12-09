@@ -26,6 +26,7 @@ class EquipmentRenderer {
                 clone.querySelector(".condition").innerHTML += element.condition;
                 clone.querySelector(".deleteButton").value += element.id;
                 clone.querySelector(".editButton").value += element.id;
+                //for deleteEquipment() to delete the tr when deleting
                 clone.setAttribute("id", element.id);
 
                 equipments.appendChild(clone)
