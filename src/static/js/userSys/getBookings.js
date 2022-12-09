@@ -37,6 +37,8 @@ class BookingsRenderer {
                     this.activityUI(clone, element, element.bowlingTimeSlotJoinedTableList)
                     this.activityUI(clone, element, element.airHockeyTimeSlotJoinedTableList)
                 }
+                clone.querySelector(".deleteButton").value += element.bookingId;
+                clone.setAttribute("id", element.bookingId);
 
                 bookings.appendChild(clone)
             });
@@ -68,6 +70,22 @@ class BookingsRenderer {
                 }
             }
         }
+    }
+
+    deleteBooking(id) {
+        if (this.confirmDelete()) {
+            utilFetch.operationData("bookings/", id, "", "DELETE");
+            //Remove deleted element from UI
+            console.log("ID: "+id)
+            $('#' + id).remove();
+            console.log('Delete was successful');
+        } else {
+            console.log('Delete was cancelled');
+        }
+    }
+    //Confirm prompt
+    confirmDelete() {
+        return confirm('Er du sikker på du vil slette?');
     }
 
     /*updateCalendarUI() {
