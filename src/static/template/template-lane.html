@@ -18,7 +18,7 @@
     </div>
     <div class="card-footer">
       <button type="button" class="w-100 btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-        id="btnId" onclick="bookLane.modalBook(this.value)">Book</button>
+        id="btnId" onclick="bookings.modalBook(this.value)">Book</button>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
         </div>
         <div class="modal-body">
 
-          <input type="text" id="bowlingId" value="" hidden readonly>
+          <input type="text" id="activityId" value="" hidden readonly>
 
           <div class="container-fluid">
             <div class="row row-cols-1">
@@ -51,15 +51,6 @@
               </div>
 
               <hr>
-
-              <!-- <div class="col">
-                <input type='radio' name='duration' value="1" id="1hour">
-                <label for="1Hour">1 time</label>
-              </div>
-              <div class="col mb-3">
-                <input type='radio' name='duration' value="2">
-                <label for="2Hour">2 timer</label>
-              </div> -->
 
               <div class="col mb-4">
                 <label>Vælg varighed</label>
@@ -88,8 +79,8 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" onclick="timeSlotRenderer.modalClosedRemoveElement()"
             data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal" id="btnId2"
-            onclick="bookLane.bowlingTimeSlot(this.value)" id="bowlingId">Næste</button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookingModal" id="BtnActivityId"
+            onclick="bookings.activityTimeSlot('bowling')" id="bowlingId">Næste</button>
         </div>
       </div>
     </div>
@@ -129,7 +120,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <input type="submit" class="btn btn-primary" value="Book" onclick="bookLane.createBooking()"></input>
+          <input type="submit" class="btn btn-primary" value="Book" onclick="bookings.createBookingRefractor('bowling')"></input>
         </div>
         <!-- </form> -->
       </div>
