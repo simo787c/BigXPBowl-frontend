@@ -91,27 +91,17 @@ class BookingsRenderer {
 
     async editBooking(id) {
         console.log("edit clicked " + id);
-        let data = await utilFetch.operationData("equipment/", id, "", "PATCH");
+        let data = await utilFetch.operationData("bookings/", id, "", "GET");
 
         document.getElementById("id").value = data.id;
-        //document.getElementById("activityType").value += data.activityType;
-        document.getElementById("name").value = data.name;
-        document.getElementById("description").value = data.description;
-        
-        if(data.activityType == "Bowling"){
-            document.getElementById("activityType").value = "Bowling"
-        }else if(data.activityType == "Air Hockey"){
-            document.getElementById("activityType").value = "Air Hockey"
-        }
+        document.getElementById('email').value = data.email;
+        document.getElementById('activityDate').value = data.activityDate.split('T')[0];
+        document.getElementById('activityDuration').value = data.activityDuration;
+        document.getElementById('activityId').value = data.activityId;
+        document.getElementById('activityType').value = data.activityType;
+        document.getElementById('timeSlot').value = data.timeSlot;
 
-        switch(data.condition){
-            case "Ny":
-                document.getElementById("condition").value = "Ny";
-            case "Ødelagt":
-            document.getElementById("condition").value = "Ødelagt";
-            case "Bestil Forsyning":
-                document.getElementById("condition").value = "Bestil Forsyning";
-        }
+
 
     }
 

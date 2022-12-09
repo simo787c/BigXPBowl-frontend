@@ -389,10 +389,55 @@
                         </tr>
                     </thead>
                     <tbody id="bookings"></tbody>
-                </table>
-
-               
+                </table> 
             </div>
+
+<!--Edit Booking Modal-->
+            <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalPostLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalPostLabel">Redigér Booking</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" id="formPost" method="PATCH"
+                            enctype="application/x-www-form-urlencoded">
+                            <div class="modal-body">
+                                <!-- only Mail can be edited! -->
+                                <input hidden name="id" id="id" readonly></input>
+
+                                <label for="email" class="col">Email</label>
+                                <input name="email" id="email" class="form-control col" type="text"></input>
+
+                                <label for="activityDate" class="col">Dato for Aktivitet</label>
+                                <input name="activityDate" id="activityDate" class="form-control col" type="text"></input>
+
+                                <label for="activityDuration" class="col">Aktivitetslængde</label>
+                                <input name="activityDuration" id="activityDuration" class="form-control col" type="text"></input>
+
+                                <label for="activityId" class="col">Bane Nummmer</label>
+                                <input name="activityId" id="activityId" class="form-control col" type="text"></input>
+
+                                
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Luk</button>
+                                <input class="btn btn-success" type="submit" id="btn" value="Updatér"
+                                    data-bs-dismiss="modal"></input>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
             <script>
                 $("#searchBar").keyup(function(event) {
                     if (event.key === "Enter") {
