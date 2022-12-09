@@ -37,6 +37,7 @@ class BookingsRenderer {
                     this.activityUI(clone, element, element.bowlingTimeSlotJoinedTableList)
                     this.activityUI(clone, element, element.airHockeyTimeSlotJoinedTableList)
                 }
+                clone.querySelector(".editButton").value += element.bookingId;
                 clone.querySelector(".deleteButton").value += element.bookingId;
                 clone.setAttribute("id", element.bookingId);
 
@@ -86,6 +87,22 @@ class BookingsRenderer {
     //Confirm prompt
     confirmDelete() {
         return confirm('Er du sikker på du vil slette?');
+    }
+
+    async editBooking(id) {
+        console.log("edit clicked " + id);
+        let data = await utilFetch.operationData("bookings/", id, "", "GET");
+
+        document.getElementById("id").value = data.id;
+        document.getElementById('email').value = data.email;
+        document.getElementById('activityDate').value = data.activityDate.split('T')[0];
+        document.getElementById('activityDuration').value = data.activityDuration;
+        document.getElementById('activityId').value = data.activityId;
+        document.getElementById('activityType').value = data.activityType;
+        document.getElementById('timeSlot').value = data.timeSlot;
+
+
+
     }
 
     /*updateCalendarUI() {
