@@ -3,7 +3,7 @@ class Bookings {
     constructor() {
     }
 
-    modalBook(id) {
+    modalBook(id, activityType) {
         $('#activityId').val(id);
         document.getElementById("activityId").setAttribute("value", id)
         //let options = `<option value="${element.startTime}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
@@ -11,7 +11,7 @@ class Bookings {
         let modalTitle = document.getElementById("staticBackdropLabel");
         modalTitle.innerHTML = "Bowling bane #" + id + ' - Tidspunkt'
 
-        timeSlotRenderer.timeSlotUpdateUI(id)
+        timeSlotRenderer.timeSlotUpdateUI(id, activityType)
         this.validateInput();
     }
 
@@ -174,5 +174,3 @@ class Bookings {
     }
 }
 var bookings = new Bookings();
-
-
