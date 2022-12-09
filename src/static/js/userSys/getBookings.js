@@ -37,6 +37,7 @@ class BookingsRenderer {
                     this.activityUI(clone, element, element.bowlingTimeSlotJoinedTableList)
                     this.activityUI(clone, element, element.airHockeyTimeSlotJoinedTableList)
                 }
+                clone.querySelector(".editButton").value += element.bookingId;
                 clone.querySelector(".deleteButton").value += element.bookingId;
                 clone.setAttribute("id", element.bookingId);
 
@@ -86,6 +87,32 @@ class BookingsRenderer {
     //Confirm prompt
     confirmDelete() {
         return confirm('Er du sikker på du vil slette?');
+    }
+
+    async editBooking(id) {
+        console.log("edit clicked " + id);
+        let data = await utilFetch.operationData("equipment/", id, "", "PATCH");
+
+        document.getElementById("id").value = data.id;
+        //document.getElementById("activityType").value += data.activityType;
+        document.getElementById("name").value = data.name;
+        document.getElementById("description").value = data.description;
+        
+        if(data.activityType == "Bowling"){
+            document.getElementById("activityType").value = "Bowling"
+        }else if(data.activityType == "Air Hockey"){
+            document.getElementById("activityType").value = "Air Hockey"
+        }
+
+        switch(data.condition){
+            case "Ny":
+                document.getElementById("condition").value = "Ny";
+            case "Ødelagt":
+            document.getElementById("condition").value = "Ødelagt";
+            case "Bestil Forsyning":
+                document.getElementById("condition").value = "Bestil Forsyning";
+        }
+
     }
 
     /*updateCalendarUI() {

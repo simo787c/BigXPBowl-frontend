@@ -5,13 +5,13 @@
     <td class="description"></td>
     <td class="condition"></td>
     <td>
+        <button type="button" class="w-100 btn btn-lg btn-primary editButton" value="" 
+        onclick="equipmentRenderer.editButtonClick(this.value)" data-bs-toggle="modal" data-bs-target="#modalPost">
+            Rediger
+        </button>
         <button type="button" class="btn btn-md btn-danger max-w-25 deleteButton" value=""
             onclick="equipmentRenderer.deleteEquipment(this.value)">
             <i class="bi bi-trash fs-5"></i>
-        </button>
-        <button type="button" id="editButton" class="w-100 btn btn-lg btn-primary editButton" value="" 
-        onclick="equipmentRenderer.editButtonClick(this.value)" data-bs-toggle="modal" data-bs-target="#modalPost">
-            Rediger
         </button>
     </td>
 </template>
