@@ -618,21 +618,21 @@
                             <div class="modal-body">
 
 
-                                <form class="form" id="formPost" method="POST"
+                                <form class="form" id="formPost" method="POST" autocomplete="off"
                                     enctype="application/x-www-form-urlencoded">
                                     <div class="modal-body">
                                         <!-- activityType,name,description,condition -->
                                         <input hidden name="equipmentMethodType" id="equipmentMethodType" readonly></input>
                                         <input hidden name="id" id="id" readonly></input>
                                         <label for="name" class="col">navn</label>
-                                        <input name="name" id="name" class="form-control col" type="text"></input>
+                                        <input name="name" id="name" class="form-control col" autocomplete="off" type="text" ></input>
                                         <label for="activityType" class="col">Aktivitet</label>
                                         <select name="activityType" id="activityType" class="form-control col">
                                             <option value="Bowling">Bowling</option>
                                             <option value="Air Hockey">Air Hockey</option>
                                         </select>
                                         <label for="description" class="col">Beskrivelse</label>
-                                        <input name="description" id="description" class="form-control col"
+                                        <input name="description" id="description" class="form-control col" autocomplete="off"
                                             type="text"></input>
                                         <label for="condition" class="col">Tilstand</label>
                                         <select name="condition" id="condition" class="form-control col">
