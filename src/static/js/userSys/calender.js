@@ -9,9 +9,11 @@ class DutySchedule {
 
     //async fetch, await response then call update
     async fetchData() {
-        // this.data = await utilFetch.fetchData('dutySchedules', '');
+        this.data = await utilFetch.operationData('bookings/', '', '', 'GET');
+        this.dataTimeSlot = await utilFetch.operationData('timeSlots/', '', '', 'GET');
         this.calendarApp();
         console.log(this.data)
+        console.log(this.dataTimeSlot)
     }
 
     getDayOfWeek() {
@@ -73,11 +75,19 @@ class DutySchedule {
     setEventsFromFetch() {
         for (let dataIndex in this.data) {
             let entry = this.data[dataIndex];
-            const eventEntries = new Map([
+            /*const eventEntries = new Map([
                 ['name', entry.name],
                 ['endTime', new Date(entry.endTime)],
                 ['startTime', new Date(entry.startTime)],
                 ['day', new Date(entry.day).toString()]
+            ]);*/
+            const eventEntries = new Map([
+                ['name', entry.email + entry.bowlingTimeSlotJoinedTableList[0].bowlingId],
+                //['endTime', new Date(2022, 11, 5, 12)],
+                //['startTime', new Date(2022, 11, 5, 11)],
+                ['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1])],
+                ['startTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1])],
+                ['day', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0]).toString()]
             ]);
             const eventData = Object.fromEntries(eventEntries);
             //this.apts += [{eventData}];
@@ -107,13 +117,22 @@ class DutySchedule {
                     ['startTime', new Date(entry.startTime.split(", ")[0], entry.startTime.split(", ")[1], entry.startTime.split(", ")[2], entry.startTime.split(", ")[3])],
                     ['day', new Date(entry.day.split(", ")[0], entry.day.split(", ")[1], entry.day.split(", ")[2]).toString()]
                 ]);*/
-                const eventEntries = new Map([
+                /*const eventEntries = new Map([
                     ['name', entry.name],
                     ['day', new Date(entry.day).toString()],
                     ['startTime', new Date(entry.startTime)],
                     ['endTime', new Date(entry.endTime)]
+                ]);*/
+                const eventEntries = new Map([
+                    ['name', "Email: " + entry.email + "<br>"  + "Bane: " + entry.bowlingTimeSlotJoinedTableList[0].bowlingId],
+                    //['endTime', new Date(2022, 11, 5, 12)],
+                    //['startTime', new Date(2022, 11, 5, 11)],
+                    ['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1])],
+                    ['startTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1])],
+                    ['day', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0]).toString()]
                 ]);
                 const eventData = Object.fromEntries(eventEntries);
+                console.log(eventData)
                 this.apts.push(eventData);
                 this.aptDates.push(this.apts[dataIndex].day);
             }
