@@ -37,6 +37,9 @@ class BookingsRenderer {
                     this.activityUI(clone, element, element.bowlingTimeSlotJoinedTableList)
                     this.activityUI(clone, element, element.airHockeyTimeSlotJoinedTableList)
                 }
+                clone.querySelector(".editButton").value += element.bookingId;
+                clone.querySelector(".deleteButton").value += element.bookingId;
+                clone.setAttribute("id", element.bookingId);
 
                 bookings.appendChild(clone)
             });
@@ -59,7 +62,7 @@ class BookingsRenderer {
             }
             clone.querySelector(".activityId").innerHTML += activityId + "<br>"
             // Syntax for Get
-            let activityData = await utilFetch.operationData(activityType, activityJT[i].timeSlotId, "", "GET");
+            let activityData = await utilFetch.operationData(activityType, activityId, "", "GET");
             clone.querySelector(".activityType").innerHTML += await activityData.name + "<br>"
             let timeslot = await utilFetch.operationData("timeSlots/", "", "", "GET");
             for (let j = 0; j < timeslot.length; j++) {
@@ -68,6 +71,38 @@ class BookingsRenderer {
                 }
             }
         }
+    }
+
+    deleteBooking(id) {
+        if (this.confirmDelete()) {
+            utilFetch.operationData("bookings/", id, "", "DELETE");
+            //Remove deleted element from UI
+            console.log("ID: "+id)
+            $('#' + id).remove();
+            console.log('Delete was successful');
+        } else {
+            console.log('Delete was cancelled');
+        }
+    }
+    //Confirm prompt
+    confirmDelete() {
+        return confirm('Er du sikker på du vil slette?');
+    }
+
+    async editBooking(id) {
+        console.log("edit clicked " + id);
+        let data = await utilFetch.operationData("bookings/", id, "", "GET");
+
+        document.getElementById("id").value = data.id;
+        document.getElementById('email').value = data.email;
+        document.getElementById('activityDate').value = data.activityDate.split('T')[0];
+        document.getElementById('activityDuration').value = data.activityDuration;
+        document.getElementById('activityId').value = data.activityId;
+        document.getElementById('activityType').value = data.activityType;
+        document.getElementById('timeSlot').value = data.timeSlot;
+
+
+
     }
 
     /*updateCalendarUI() {
