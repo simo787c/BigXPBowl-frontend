@@ -93,23 +93,36 @@ var equipmentRenderer = new EquipmentRenderer;
 const formPostEvent = document.querySelector("#formPost");
 
 // listening to when Post form get submitted
-formPostEvent.addEventListener("submit", event => {
+formPostEvent.addEventListener("submit", async (event) => {
     event.preventDefault();
     let equipmentMethodType = document.getElementById("equipmentMethodType").value
 
     const formData = new FormData(formPostEvent);
-    const dataFromForm = Object.fromEntries(formData);
+    //let dataFromForm;
 
     //we made a workaround to use a field in form with the method type, as method attribute on form is dumb
     // We can write method type in uppercase but it gives in lowercase (deprecated)
     //in the html form, it only has post and get, we dont use the functionality (deprecated)
+    // if (equipmentMethodType == "POST") {
+    //     console.log("IF " + equipmentMethodType);
+    //     formData.delete("id");
+    //     dataFromForm = Object.fromEntries(formData);
+    //     await utilFetch.operationData("equipment", "", dataFromForm, "POST");
+    // } else if (equipmentMethodType == "PATCH") {
+    //     console.log("IF " + equipmentMethodType);
+    //     dataFromForm = Object.fromEntries(formData);
+    //     await utilFetch.operationData("equipment/", document.getElementById("id").value, dataFromForm, "PATCH");
+    // }
+
+    //NEW NEW post patch method, fetch doesnt need an ID by itself since if its included in the form it'll know what to do
+    //Might be a security breach since its done in the frontend, and post endpoint doesnt break if it gets an id with the request
+    //5. in https://www.baeldung.com/spring-data-crud-repository-save
     if (equipmentMethodType == "POST") {
-        console.log("IF POST");
-        utilFetch.operationData("equipment", "", dataFromForm, "POST");
-    } else if (equipmentMethodType == "PATCH") {
-        console.log("IF PATCH");
-        utilFetch.operationData("equipment/", id, dataFromForm, "PATCH");
+        console.log("IF " + equipmentMethodType);
+        formData.delete("id");
     }
+    const dataFromForm = Object.fromEntries(formData);
+    await utilFetch.operationData("equipment/", "", dataFromForm, "POST");
     equipmentRenderer.updateUI();
 })
 
