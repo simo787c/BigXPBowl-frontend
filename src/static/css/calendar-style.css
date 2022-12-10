@@ -406,6 +406,7 @@ input.add-event-edit:-ms-input-placeholder {
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    /* outline: 1px dashed black */
 }
 
 .has-events::after {

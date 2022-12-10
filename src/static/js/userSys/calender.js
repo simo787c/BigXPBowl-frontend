@@ -444,7 +444,7 @@ class BookingCalendar {
                 var idx = this.aptDates.indexOf(deletedDate.toString());
                 // Delete booking
                 utilFetch.operationData("bookings/", (idx + 1), "", "DELETE");
-                
+
                 if (idx >= 0) {
                     this.aptDates.splice(idx, 1);
                     // remove dot from calendar view
