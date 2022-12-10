@@ -96,13 +96,14 @@ function home() {
 function booking() {
     $('#view').html(cloneHtmlTemplate('template-booking'));
     bookingsRenderer.updateUI("");
-   }
+}
 
-   function booking_calendar() {
+function booking_calendar() {
     $('#view').html(cloneHtmlTemplate('template-booking-calendar'));
     document.getElementById("view").setAttribute("class", "container-fluid")
+    bookingCalendar.updateUI()
     // bookingCalendarRenderer.updateUI();
-   }
+}
 
 /**
  * About route action.

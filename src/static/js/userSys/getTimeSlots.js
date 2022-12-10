@@ -98,7 +98,7 @@ class TimeSlotRenderer {
                     if (this.value == timeSlotRenderer.bookingData[i].activityDate.split("T")[0]) {
                         for (let j = 0; j < timeSlotRenderer.bookingData.length; j++) {
                             for (let k = 0; k < timeSlotRenderer.bookingData[j].bowlingTimeSlotJoinedTableList.length; k++) {
-                                $('#timeSlot' + timeSlotRenderer.bookingData[k].bowlingTimeSlotJoinedTableList[k].timeSlotId).prop("disabled", false);
+                                $('#timeSlot' + timeSlotRenderer.bookingData[j].bowlingTimeSlotJoinedTableList[k].timeSlotId).prop("disabled", false);
                             }
                         }
                         bookingOnDate = true;

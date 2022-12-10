@@ -1,8 +1,13 @@
-class DutySchedule {
+class BookingCalendar {
     endpointURL = "http://localhost:8080/api/v1/timeSlots/";
 
     constructor(data) {
         this.data = data;
+        //this.fetchData();
+        //this.getDayOfWeek();
+    }
+
+    updateUI() {
         this.fetchData();
         this.getDayOfWeek();
     }
@@ -12,12 +17,12 @@ class DutySchedule {
         this.data = await utilFetch.operationData('bookings/', '', '', 'GET');
         this.dataTimeSlot = await utilFetch.operationData('timeSlots/', '', '', 'GET');
         this.calendarApp();
-        console.log(this.data)
-        console.log(this.dataTimeSlot)
+        //console.log(this.data)
+        //console.log(this.dataTimeSlot)
     }
 
     getDayOfWeek() {
-        // Days of week, starting on Sunday
+        // Days of week, starting on Monday
         var DaysOfWeek = [
             'Man',
             'Tir',
@@ -75,19 +80,11 @@ class DutySchedule {
     setEventsFromFetch() {
         for (let dataIndex in this.data) {
             let entry = this.data[dataIndex];
-            /*const eventEntries = new Map([
+            const eventEntries = new Map([
                 ['name', entry.name],
                 ['endTime', new Date(entry.endTime)],
                 ['startTime', new Date(entry.startTime)],
                 ['day', new Date(entry.day).toString()]
-            ]);*/
-            const eventEntries = new Map([
-                ['name', entry.email + entry.bowlingTimeSlotJoinedTableList[0].bowlingId],
-                //['endTime', new Date(2022, 11, 5, 12)],
-                //['startTime', new Date(2022, 11, 5, 11)],
-                ['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1])],
-                ['startTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1])],
-                ['day', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0]).toString()]
             ]);
             const eventData = Object.fromEntries(eventEntries);
             //this.apts += [{eventData}];
@@ -95,8 +92,26 @@ class DutySchedule {
         }
     }
 
+    /**
+     * Should fix the order of time when booked 2 hour so it will not be 15:00 & 14:00 but 14:00 & 15:00
+     */
+    dataTimeSlotOrderFix() {
+        try {
+            this.data.forEach(async (element) => {
+                if (element.bowlingTimeSlotJoinedTableList != "" || element.airHockeyTimeSlotJoinedTableList != "") {
+                    element.bowlingTimeSlotJoinedTableList = element.bowlingTimeSlotJoinedTableList.sort((a, b) => (a.timeSlotId > b.timeSlotId) ? 1 : (b.timeSlotId > a.timeSlotId) ? -1 : 0)
+                    element.airHockeyTimeSlotJoinedTableList = element.airHockeyTimeSlotJoinedTableList.sort((a, b) => (a.timeSlotId > b.timeSlotId) ? 1 : (b.timeSlotId > a.timeSlotId) ? -1 : 0)
+                }
+            });
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
 
     calendarApp(date) {
+
+        this.dataTimeSlotOrderFix()
 
         if (!(date instanceof Date)) {
             date = new Date();
@@ -111,28 +126,89 @@ class DutySchedule {
         if (this.data != null) {
             for (let dataIndex in this.data) {
                 let entry = this.data[dataIndex];
-                /*const eventEntries = new Map([
-                    ['name', entry.name],
-                    ['endTime', new Date(entry.endTime.split(", ")[0], entry.endTime.split(", ")[1], entry.endTime.split(", ")[2], entry.endTime.split(", ")[3])],
-                    ['startTime', new Date(entry.startTime.split(", ")[0], entry.startTime.split(", ")[1], entry.startTime.split(", ")[2], entry.startTime.split(", ")[3])],
-                    ['day', new Date(entry.day.split(", ")[0], entry.day.split(", ")[1], entry.day.split(", ")[2]).toString()]
-                ]);*/
-                /*const eventEntries = new Map([
-                    ['name', entry.name],
-                    ['day', new Date(entry.day).toString()],
-                    ['startTime', new Date(entry.startTime)],
-                    ['endTime', new Date(entry.endTime)]
-                ]);*/
+
+                let aId;
+                let startTimeHour;
+                let startTimeMin;
+                let endTimeHour;
+                let endTimeMin;
+                let activityType;
+                let activityBookingLaneTable;
+
+                if (entry.bowlingTimeSlotJoinedTableList[0] != null) {
+                    activityType = 'Bowling'
+                    for (let i = 0; i < entry.bowlingTimeSlotJoinedTableList.length; i++) {
+                        aId = entry.bowlingTimeSlotJoinedTableList[i].bowlingId
+                        if (entry.bowlingTimeSlotJoinedTableList.length > 1) {
+                            startTimeHour = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0] - 1
+                            startTimeMin = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1]
+                            endTimeHour = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[i].timeSlotId].endTime.split(":")[0] - 1
+                            endTimeMin = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[i].timeSlotId].endTime.split(":")[1]
+                        } else if (entry.bowlingTimeSlotJoinedTableList.length === 1) {
+                            startTimeHour = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0] - 1
+                            startTimeMin = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1]
+                            endTimeHour = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0] - 1
+                            endTimeMin = bookingCalendar.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1]
+                        }
+                        // activityBookingLaneTable = 'Bane: ' + aId;
+                        activityBookingLaneTable =
+                            `<tr>
+                                <th>Bane</th>
+                                <td>${aId}</td>
+                            </tr>`;
+                    }
+                } else if (entry.airHockeyTimeSlotJoinedTableList[0] != null) {
+                    activityType = 'Air Hockey'
+                    aId = entry.airHockeyTimeSlotJoinedTableList[0].airHockeyId
+                    startTimeHour = bookingCalendar.dataTimeSlot[entry.airHockeyTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0] - 1
+                    startTimeMin = bookingCalendar.dataTimeSlot[entry.airHockeyTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1]
+                    endTimeHour = bookingCalendar.dataTimeSlot[entry.airHockeyTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0] - 1
+                    endTimeMin = bookingCalendar.dataTimeSlot[entry.airHockeyTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1]
+                    // activityBookingLaneTable = 'Bord: ' + aId;
+                    activityBookingLaneTable =
+                        `<tr>
+                            <th>Bord</th>
+                            <td>${aId}</td>
+                        </tr>`;
+                } else if (entry.diningTimeSlotJoinedTableList[0] != null) {
+                    activityType = 'Restaurant'
+                    aId = entry.diningTimeSlotJoinedTableList[0].diningId
+                    startTimeHour = bookingCalendar.dataTimeSlot[entry.diningTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0] - 1
+                    startTimeMin = bookingCalendar.dataTimeSlot[entry.diningTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1]
+                    endTimeHour = bookingCalendar.dataTimeSlot[entry.diningTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0] - 1
+                    endTimeMin = bookingCalendar.dataTimeSlot[entry.diningTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1]
+                    activityBookingLaneTable = ''//'Bord: ' + aId;
+                }
+
+                let htmlFormat =
+                    `<div class="table-responsive pt-2">
+                        <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
+                            <tr>
+                                <th>E-mail</th>
+                                <td>${entry.email}</td>
+                            </tr>
+                            <tr>
+                                <th>Aktivitet</th>
+                                <td>${activityType}</td>
+                            </tr>
+                            ${activityBookingLaneTable}
+                            <tr>
+                                <th>Antal deltagere</th>
+                                <td>${entry.nrOfParticipants}</td>
+                            </tr>
+                        </table> 
+                    </div>`;
                 const eventEntries = new Map([
-                    ['name', "Email: " + entry.email + "<br>"  + "Bane: " + entry.bowlingTimeSlotJoinedTableList[0].bowlingId],
+                    //['name', "Email: " + entry.email + "<br>" + "Activitet: " + activityType + "<br>" + activityBookingLaneTable],
+                    ['name', htmlFormat],
                     //['endTime', new Date(2022, 11, 5, 12)],
                     //['startTime', new Date(2022, 11, 5, 11)],
-                    ['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1])],
-                    ['startTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].startTime.split(":")[1])],
-                    ['day', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0]).toString()]
+                    //['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1]-1), entry.activityDate.split("-")[2].split("T")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[0], dutySchedule.dataTimeSlot[entry.bowlingTimeSlotJoinedTableList[0].timeSlotId].endTime.split(":")[1])],
+                    ['endTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1] - 1), entry.activityDate.split("-")[2].split("T")[0], endTimeHour, endTimeMin)],
+                    ['startTime', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1] - 1), entry.activityDate.split("-")[2].split("T")[0], startTimeHour, startTimeMin)],
+                    ['day', new Date(entry.activityDate.split("-")[0], (entry.activityDate.split("-")[1] - 1), entry.activityDate.split("-")[2].split("T")[0]).toString()]
                 ]);
                 const eventData = Object.fromEntries(eventEntries);
-                console.log(eventData)
                 this.apts.push(eventData);
                 this.aptDates.push(this.apts[dataIndex].day);
             }
@@ -358,24 +434,37 @@ class DutySchedule {
     };
 
     deleteEvent(e) {
-        var deleted = this.apts.splice(e.currentTarget.getAttribute("data-idx"), 1);
-        var deletedDate = new Date(deleted[0].day);
-        var anyDatesLeft = this.showEventsByDay(deletedDate);
-        if (anyDatesLeft === false) {
-            // safe to remove from array
-            var idx = this.aptDates.indexOf(deletedDate.toString());
-            utilFetch.delete('dutySchedules', this.data[idx].dutyScheduleId);
-            if (idx >= 0) {
-                this.aptDates.splice(idx, 1);
-                // remove dot from calendar view
-                var ele = document.querySelector('.cview--date[data-date="' + deletedDate.toString() + '"]');
-                if (ele) {
-                    ele.classList.remove("has-events");
+        if (this.confirmDelete()) {
+            //Remove deleted element from UI
+            var deleted = this.apts.splice(e.currentTarget.getAttribute("data-idx"), 1);
+            var deletedDate = new Date(deleted[0].day);
+            var anyDatesLeft = this.showEventsByDay(deletedDate);
+            if (anyDatesLeft === false) {
+                // safe to remove from array
+                var idx = this.aptDates.indexOf(deletedDate.toString());
+                // Delete booking
+                utilFetch.operationData("bookings/", (idx + 1), "", "DELETE");
+                
+                if (idx >= 0) {
+                    this.aptDates.splice(idx, 1);
+                    // remove dot from calendar view
+                    var ele = document.querySelector('.cview--date[data-date="' + deletedDate.toString() + '"]');
+                    if (ele) {
+                        ele.classList.remove("has-events");
+                    }
                 }
             }
+            this.openDayWindow(deletedDate);
+            console.log('Delete was successful');
+        } else {
+            console.log('Delete was cancelled');
         }
-        this.openDayWindow(deletedDate);
     };
+
+    //Confirm prompt
+    confirmDelete() {
+        return confirm('Er du sikker på du vil slette?');
+    }
 
     sortEventsByTime(events) {
         if (!events) return [];
@@ -565,4 +654,4 @@ class DutySchedule {
 
 }
 
-var dutySchedule = new DutySchedule();
+var bookingCalendar = new BookingCalendar();

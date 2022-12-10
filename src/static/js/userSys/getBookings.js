@@ -14,6 +14,8 @@ class BookingsRenderer {
             //clear bookings div content
             bookings.innerHTML = ""
 
+            this.dataTimeSlotOrderFix(data)
+
             //iterate through each booking, then clone and assign a htmltemplate for it
             data.forEach(async (element) => {
                 let clone = cloneHtmlTemplateTableTr("template-booking-item")
@@ -54,6 +56,7 @@ class BookingsRenderer {
         let activityId;
         let activityType;
         for (let i = 0; i < activityJT.length; i++) {
+            
             if (element.bowlingTimeSlotJoinedTableList != "") {
                 activityId = activityJT[i].bowlingId
                 activityType = "activities/bowling/"
@@ -71,6 +74,22 @@ class BookingsRenderer {
                     clone.querySelector(".timeSlot").innerHTML += timeslot[j].startTime  + "<br>"
                 }
             }
+        }
+    }
+
+    /**
+     * Should fix the order of time when booked 2 hour so it will not be 15:00 & 14:00 but 14:00 & 15:00
+     */
+     dataTimeSlotOrderFix(data) {
+        try {
+            data.forEach(async (element) => {
+                if (element.bowlingTimeSlotJoinedTableList != "" || element.airHockeyTimeSlotJoinedTableList != "") {
+                    element.bowlingTimeSlotJoinedTableList = element.bowlingTimeSlotJoinedTableList.sort((a, b) => (a.timeSlotId > b.timeSlotId) ? 1 : (b.timeSlotId > a.timeSlotId) ? -1 : 0)
+                    element.airHockeyTimeSlotJoinedTableList = element.airHockeyTimeSlotJoinedTableList.sort((a, b) => (a.timeSlotId > b.timeSlotId) ? 1 : (b.timeSlotId > a.timeSlotId) ? -1 : 0)
+                }
+            });
+        } catch (error) {
+            console.log(error)
         }
     }
 
