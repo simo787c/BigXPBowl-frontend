@@ -1,3 +1,10 @@
+/**
+ * Methods:
+ * 1. modalBook(id, activityType)
+ * 2. activityTimeSlot(activityType)
+ * 3. createBookingRefractor(activityType)
+ * 4. validateInput()
+ */
 class Bookings {
 
     constructor() {
@@ -9,7 +16,13 @@ class Bookings {
         //let options = `<option value="${element.startTime}" id="${"timeSlot" + element.timeSlotId}">${element.startTime}</option>`;
 
         let modalTitle = document.getElementById("staticBackdropLabel");
-        modalTitle.innerHTML = "Bowling bane #" + id + ' - Tidspunkt'
+
+        if (activityType == "bowling") {
+            modalTitle.innerHTML = "Bowling bane #" + id + ' - Tidspunkt'
+        } else if (activityType == "airHockey") {
+            modalTitle.innerHTML = "Air hockey table #" + id + ' - Tidspunkt'
+        }
+
 
         timeSlotRenderer.timeSlotUpdateUI(id, activityType)
         this.validateInput();
