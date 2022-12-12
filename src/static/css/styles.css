@@ -368,3 +368,11 @@ legend {
 .timeSlots:disabled {
     background-color: rgb(221, 221, 221);
 }
+
+/* Modal button Next when disabled */
+.btn-activity:disabled {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    /* color: #edf1f2; */
+}

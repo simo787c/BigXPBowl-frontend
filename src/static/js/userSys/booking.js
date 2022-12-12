@@ -22,8 +22,8 @@ class Bookings {
         let activityData = await utilFetch.operationData(`activities/${activityType}/`, this.activityId, "", "GET");
         let activityEntity;
 
-        console.log("id: " + this.activityId)
-        console.log(activityType)
+        //console.log("id: " + this.activityId)
+        //console.log(activityType)
 
         if (nrOfParticipants == 0) {
             nrOfParticipants = 1;
@@ -54,6 +54,10 @@ class Bookings {
             ]);
         }
 
+        /**
+         * If 2 hour is selected then add the next timeSlotId based on the selected time to activityEntity.
+         * (ex. if time 13:00 is the selected on then the time 14:00 should be added too )
+         */
         if (document.getElementById("2hour").checked) {
             let timeSlotEntries2Hour = new Map([
                 ['timeSlotId', (parseInt(this.timeSlotId) + 1)]
@@ -62,12 +66,15 @@ class Bookings {
             activityEntity.get("timeSlots").push(timeSlotDataJS2Hour)
         }
 
-        console.log("Test: " + activityData.activityId)
+        /**
+         * This adds the existing time that are on activity.
+         * So it's not gonna override the existing data
+         */
         for (let i = 0; i < (activityData.timeSlots.length); i++) {
             const element = activityData.timeSlots[i];
-            console.log(element)
+            //console.log(element)
             activityEntity.get("timeSlots").push(element)
-            console.log(activityEntity.get("timeSlots"))
+            //console.log(activityEntity.get("timeSlots"))
         }
 
         // Bowling Data that will get send to patch
@@ -96,10 +103,10 @@ class Bookings {
             ['activityDuration', document.querySelector('input[name="duration"]:checked').value + " time(r)"],
             ['nrOfParticipants', nrOfParticipants],
             ['bowlingTimeSlotJoinedTableList', []],
-            ['airHockeyTimeSlotJoinedTableList', []]
+            ['airHockeyTimeSlotJoinedTableList', []],
+            ['diningTimeSlotJoinedTableList', []]
         ])
 
-        console.log(this.airHockeyTimeSlotData)
         if (activityType == "bowling") {
             for (let i = 0; i < this.bowlingTimeSlotData.length; i++) {
                 if (this.bowlingTimeSlotData[i].bowlingId == bookings.activityId && this.bowlingTimeSlotData[i].timeSlotId == bookings.timeSlotId) {
@@ -127,7 +134,6 @@ class Bookings {
                 }
             }
 
-            console.log("Timeslot id: " + activityTimeSlotId)
             activityTimeSlotJT = new Map([
                 ['airHockeyTimeSlotJTId', activityTimeSlotId]
             ])
@@ -144,7 +150,7 @@ class Bookings {
         }
 
         const bookingData = Object.fromEntries(booking);
-        console.log(bookingData)
+        //console.log(bookingData)
 
         // Syntax for Post
         await utilFetch.operationData("bookings", "", bookingData, "POST");
@@ -152,8 +158,13 @@ class Bookings {
 
     //TODO Update booking & Cancel booking
 
+    /**
+     * This method is for the first modal when booking. (Modal TimeSlot)
+     * 
+     * It checks if all input er filled out and if so then the "Next" button will not be disabled more.
+     */
     validateInput() {
-        const btnNext = document.getElementById('BtnActivityId');
+        const btnNext = document.getElementById('btnActivityId');
         btnNext.disabled = true
 
         const nrOfParticipantsInput = document.querySelector('#nrOfParticipants');

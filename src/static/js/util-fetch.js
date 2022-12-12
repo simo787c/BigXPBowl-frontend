@@ -5,6 +5,7 @@ class UtilFetch {
     constructor(data){
         this.data = data;
         this.url = "http://localhost:8080/api/v1/"
+        //this.url = "https://bigxpbowl.azurewebsites.net/api/v1/"
     }
     // async fetch, await response 
     async operationData(endpoint, id, formData, methodType) {
