@@ -23,7 +23,6 @@ class Bookings {
             modalTitle.innerHTML = "Air hockey table #" + id + ' - Tidspunkt'
         }
 
-
         timeSlotRenderer.timeSlotUpdateUI(id, activityType)
         this.validateInput();
     }
