@@ -4,7 +4,8 @@
     color: black;
     font-weight: bold;
     margin: 10px auto;
-    background: #ffc107;
+    background: #f5af58;
+    border: 1px solid rgb(0, 0, 0);
     padding: 60px 40px 80px 40px;
     width: 95%;
     min-width: 400px;
