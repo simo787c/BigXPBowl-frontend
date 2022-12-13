@@ -11,6 +11,7 @@ var htmlTemplateCache = new Map()
 const ROUTE_TEMPLATE_KEY_HOME = 'home'
 const ROUTE_TEMPLATE_KEY_BOOKING = 'booking'
 const ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR = 'booking/calendar'
+const ROUTE_TEMPLATE_KEY_ORDER = 'order'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
 const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
 const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
@@ -20,6 +21,7 @@ const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
 const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
 const ROUTE_TEMPLATE_KEY_EMPLOYEE = 'employee'
+const ROUTE_TEMPLATE_KEY_PRODUCT_ITEM = 'productItem'
 
 /**
  * Route constants.
@@ -27,6 +29,7 @@ const ROUTE_TEMPLATE_KEY_EMPLOYEE = 'employee'
 const ROUTE_HOME = '/'
 const ROUTE_BOOKING = '/booking'
 const ROUTE_BOOKING_CALENDAR = '/booking/calendar'
+const ROUTE_ORDER = '/order'
 const ROUTE_ABOUT = '/about'
 const ROUTE_BOWLING = '/bowling'
 const ROUTE_AIRHOCKEY = '/airHockey'
@@ -36,6 +39,7 @@ const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
 const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
 const ROUTE_EMPLOYEE = '/employee'
+const ROUTE_PRODUCT_ITEM = '/productItem' // TODO make admin only page
 
 /**
  * Defines the routing templates used.
@@ -43,6 +47,7 @@ const ROUTE_EMPLOYEE = '/employee'
 template(ROUTE_TEMPLATE_KEY_HOME, home)
 template(ROUTE_TEMPLATE_KEY_BOOKING, booking)
 template(ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR, booking_calendar)
+template(ROUTE_TEMPLATE_KEY_ORDER, order)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
 template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
 template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
@@ -52,6 +57,7 @@ template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
 template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
 template(ROUTE_TEMPLATE_KEY_EMPLOYEE, employee)
+template(ROUTE_TEMPLATE_KEY_PRODUCT_ITEM, productItem)
 
 /**
  * Defines the #/... url routes and the templates they match..
@@ -59,6 +65,7 @@ template(ROUTE_TEMPLATE_KEY_EMPLOYEE, employee)
 route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
 route(ROUTE_BOOKING, ROUTE_TEMPLATE_KEY_BOOKING);
 route(ROUTE_BOOKING_CALENDAR, ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR);
+route(ROUTE_ORDER, ROUTE_TEMPLATE_KEY_ORDER);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
 route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
 route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
@@ -68,6 +75,7 @@ route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
 route(ROUTE_EQUIPMENT, ROUTE_TEMPLATE_KEY_EQUIPMENT);
 route(ROUTE_EMPLOYEE, ROUTE_TEMPLATE_KEY_EMPLOYEE);
+route(ROUTE_PRODUCT_ITEM, ROUTE_TEMPLATE_KEY_PRODUCT_ITEM);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
  */
@@ -118,6 +126,11 @@ function booking_calendar() {
     }
 }
 
+function order() {
+    $('#view').html(cloneHtmlTemplate('template-order'));
+    //bookingsRenderer.updateUI("");
+}
+
 /**
  * About route action.
  */
@@ -147,6 +160,11 @@ function equipment() {
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
+};
+
+function productItem() {
+    $('#view').html(cloneHtmlTemplate('template-productItem'));
+    productItemRenderer.updateUI();
 };
 
 /**

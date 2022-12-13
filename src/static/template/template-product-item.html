@@ -1,0 +1,18 @@
+<template id="template-product-item">
+    <td class="productItemId"></td>
+    <td class="name"></td>
+    <td class="price"></td>
+    <td class="productType"></td>
+    <td class="description"></td>
+    <td class="Options text-center">
+        <button type="button" class="btn btn-sm btn-primary my-1 editButton" value="" 
+        onclick="productItemRenderer.editButtonClick(this.value)" data-bs-toggle="modal" data-bs-target="#modalPost">
+        <i class="bi bi-pencil-square">
+        </i>
+        </button>
+        <button type="button" class="btn btn-sm btn-danger my-1 deleteButton" value=""
+            onclick="productItemRenderer.deleteProductItem(this.value)">
+            <i class="bi bi-trash-fill"></i>
+        </button>
+    </td>
+</template>
