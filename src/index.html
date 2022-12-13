@@ -29,6 +29,7 @@
     <script src="./static/js/util-fetch.js" defer></script>
     <script src="./static/js/userSys/getLanes.js" defer> </script>
     <script src="./static/js/userSys/getTables.js"></script>
+    <script src="./static/js/adminSys/employee.js"></script>
     <script src="./static/js/userSys/bookLane.js"></script>
     <script src="./static/js/userSys/booking.js"></script>
     <script src="./static/js/userSys/getTimeSlots.js" defer></script>
@@ -54,8 +55,8 @@
                     <div class="py-4 px-3 mb-4 bg-light">
                         <div class="media d-flex align-items-center"><img src="./static/media/bigxpbowl_logo.png"
                                 alt="..." width="65" class="mr-3 rounded-circle img-thumbnail shadow-sm">
-                            <div class="media-body">
-                                <h4 class="m-0">Person</h4>
+                            <div class="media-body restricted-anchor disabled">
+                                <h4 class="m-0 login-username">Person</h4>
                                 <p class="font-weight-light text-muted mb-0">Personale</p>
                             </div>
                         </div>
@@ -70,11 +71,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="sub-btn nav-link text-dark font-italic">Booking</a>
+                            <a class="sub-btn nav-link text-dark font-italic restricted-anchor disabled">Booking</a>
                             <ul class="sub-menu">
-                                <li><a href="#/booking" class="sub-item nav-link text-dark font-italic">Search
+                                <li><a href="#/booking"
+                                        class="sub-item nav-link text-dark font-italic restricted-anchor disabled">Search
                                         Booking</a></li>
-                                <li><a href="#/booking/calendar" class="sub-item nav-link text-dark font-italic">Booking
+                                <li><a href="#/booking/calendar"
+                                        class="sub-item nav-link text-dark font-italic restricted-anchor disabled">Booking
                                         Calendar</a></li>
                             </ul>
                         </li>
@@ -84,6 +87,10 @@
                                 Priser
                             </a>
                         </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-italic restricted-anchor disabled"
+                                href="#/employee">Personale</a>
+                        </li>
                         <li class="nav-item">
                             <a href="#/about" class="nav-link text-dark font-italic">
                                 Om os
@@ -110,7 +117,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#/equipment" class="nav-link text-dark font-italic">
+                            <a href="#/equipment" class="nav-link text-dark font-italic restricted-anchor disabled">
                                 Udstyr
                             </a>
                         </li>
@@ -122,7 +129,7 @@
                 <div class="container-fluid text-light">
                     <div class="row row-cols-2">
                         <div class="col-9 d-flex justify-content-center align-items-center">
-                            <b>Welcome</b>&nbsp;<span id="login-username"></span>
+                            <b>Welcome</b>&nbsp;<span class="login-username" id="login-username"></span>
                         </div>
                         <div class="col-3 p-0">
                             <a class="btn btn-sm btn-primary" href="#/logout" style="float:right">Logout</a>
@@ -370,12 +377,53 @@
 
         </template>
 
+        <template id="template-employee">
+            <div class="page-content" id="content">
+                <h2 class="text-center">Personale</h2>
+
+                <div class="table-responsive pt-2">
+                    <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
+                        <thead>
+                            <tr>
+                                <th>Navn</th>
+                                <th>Titel</th>
+                                <th>Afdeling</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="employee-table"></tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+
+        <template id="template-employee-table">
+            <td class="employee-name"></td>
+            <td class="employee-title"></td>
+            <td class="employee-department"></td>
+            <td class="Options text-center">
+                <button type="button" class="btn btn-sm btn-primary my-1 editButton" value=""
+                    onclick="bookingsRenderer.editBooking(this.value)" data-bs-toggle="modal"
+                    data-bs-target="#modalEdit">
+                    <i class="bi bi-pencil-square">
+                    </i>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger my-1 deleteButton" value=""
+                    onclick="bookingsRenderer.deleteBooking(this.value)">
+                    <i class="bi bi-trash-fill">
+                    </i>
+                </button>
+            </td>
+        </template>
+
         <template id="template-booking">
             <div class="page-content" id="content">
                 <h2 class="text-center">Booking</h2>
 
-                <input type="text" placeholder="Søg.." id="searchBar" ></input>
-                <button type="submit" id="searchButton" onclick="bookingsRenderer.updateUI(document.getElementById('searchBar').value)"><i class="bi bi-search"></i></button>
+                <input type="text" placeholder="Søg.." id="searchBar"></input>
+                <button type="submit" id="searchButton"
+                    onclick="bookingsRenderer.updateUI(document.getElementById('searchBar').value)"><i
+                        class="bi bi-search"></i></button>
                 <div class="table-responsive pt-2">
                     <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
                         <thead>
@@ -385,72 +433,72 @@
                                 <th>Aktivitets længde</th>
                                 <th>Antal deltagere</th>
                                 <th>Bane nummer</th>
-                            <th>Aktivitets type</th>
-                            <th>Tidspunkt</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="bookings"></tbody>
-                </table> 
-            </div>
-            </div>
-
-<!--Edit Booking Modal-->
-            <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalPostLabel"
-            aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalPostLabel">Redigér Booking</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form" id="formEdit" method="POST"
-                            enctype="application/x-www-form-urlencoded">
-                            <div class="modal-body">
-                                <!-- only Mail can be edited! -->
-                                <input hidden name="bookingRowId" id="bookingRowId" readonly></input>
-
-                                <label for="email" class="col">Email</label>
-                                <input name="email" id="email" class="form-control col" type="text"></input>
-
-                                <label for="activityDate" class="col">Dato for Aktivitet</label>
-                                <input name="activityDate" id="activityDate" class="form-control col" type="text"></input>
-
-                                <label for="activityDuration" class="col">Aktivitetslængde</label>
-                                <input name="activityDuration" id="activityDuration" class="form-control col" type="text"></input>
-
-                                <label for="nrOfParticipants" class="col">Antal Deltagere</label>
-                                <input name="nrOfParticipants" id="nrOfParticipants" class="form-control col" type="text"></input>
-
-                                
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Luk</button>
-                                <input class="btn btn-success" type="submit" id="btn" value="Updatér"
-                                    data-bs-dismiss="modal"></input>
-                            </div>
-                        </form>
-
-                    </div>
+                                <th>Aktivitets type</th>
+                                <th>Tidspunkt</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookings"></tbody>
+                    </table>
                 </div>
             </div>
-            <script src="./static/js/userSys/getBookings.js"></script>
-        </div>
+
+            <!--Edit Booking Modal-->
+            <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="modalPostLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="modalPostLabel">Redigér Booking</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form" id="formEdit" method="POST" enctype="application/x-www-form-urlencoded">
+                                <div class="modal-body">
+                                    <!-- only Mail can be edited! -->
+                                    <input hidden name="bookingRowId" id="bookingRowId" readonly></input>
+
+                                    <label for="email" class="col">Email</label>
+                                    <input name="email" id="email" class="form-control col" type="text"></input>
+
+                                    <label for="activityDate" class="col">Dato for Aktivitet</label>
+                                    <input name="activityDate" id="activityDate" class="form-control col"
+                                        type="text"></input>
+
+                                    <label for="activityDuration" class="col">Aktivitetslængde</label>
+                                    <input name="activityDuration" id="activityDuration" class="form-control col"
+                                        type="text"></input>
+
+                                    <label for="nrOfParticipants" class="col">Antal Deltagere</label>
+                                    <input name="nrOfParticipants" id="nrOfParticipants" class="form-control col"
+                                        type="text"></input>
+
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Luk</button>
+                                    <input class="btn btn-success" type="submit" id="btn" value="Updatér"
+                                        data-bs-dismiss="modal"></input>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <script src="./static/js/userSys/getBookings.js"></script>
+            </div>
 
 
             <script>
-                $("#searchBar").keyup(function(event) {
+                $("#searchBar").keyup(function (event) {
                     if (event.key === "Enter") {
                         $("#searchButton").click();
                         console.log("test")
                     }
                     console.log("test Outer")
                 });
-                </script>
+            </script>
         </template>
 
         <!-- include template-booking-calendar html -->
@@ -497,7 +545,8 @@
                     <tbody id="equipments"></tbody>
                 </table>
 
-                <button type="button" onclick="equipmentRenderer.createButtonClick()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">
+                <button type="button" onclick="equipmentRenderer.createButtonClick()" class="btn btn-primary"
+                    data-bs-toggle="modal" data-bs-target="#modalPost">
                     Nyt udstyr
                 </button>
 
@@ -518,18 +567,20 @@
                                     enctype="application/x-www-form-urlencoded">
                                     <div class="modal-body">
                                         <!-- activityType,name,description,condition -->
-                                        <input hidden name="equipmentMethodType" id="equipmentMethodType" readonly></input>
+                                        <input hidden name="equipmentMethodType" id="equipmentMethodType"
+                                            readonly></input>
                                         <input hidden name="id" id="id" readonly></input>
                                         <label for="name" class="col">navn</label>
-                                        <input name="name" id="name" class="form-control col" autocomplete="off" type="text" ></input>
+                                        <input name="name" id="name" class="form-control col" autocomplete="off"
+                                            type="text"></input>
                                         <label for="activityType" class="col">Aktivitet</label>
                                         <select name="activityType" id="activityType" class="form-control col">
                                             <option value="Bowling">Bowling</option>
                                             <option value="Air Hockey">Air Hockey</option>
                                         </select>
                                         <label for="description" class="col">Beskrivelse</label>
-                                        <input name="description" id="description" class="form-control col" autocomplete="off"
-                                            type="text"></input>
+                                        <input name="description" id="description" class="form-control col"
+                                            autocomplete="off" type="text"></input>
                                         <label for="condition" class="col">Tilstand</label>
                                         <select name="condition" id="condition" class="form-control col">
                                             <option value="Ny">Ny</option>

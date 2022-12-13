@@ -2,8 +2,8 @@
 
 const ROUTER_LOGIN_UI = '#card-login'
 const ROUTER_LOGOUT_UI = '#card-logout'
-const ROUTER_RESTRICTED_ANCHOR = '#restricted-anchor'
-const ROUTER_USERNAME_UI = '#login-username'
+const ROUTER_RESTRICTED_ANCHOR = '.restricted-anchor'
+const ROUTER_USERNAME_UI = '.login-username'
 const ROUTER_DELETE_UI = '#btnDel'
 
 const ROUTER_SESSION_LOGIN = 'router-session-loggedin'

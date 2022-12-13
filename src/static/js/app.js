@@ -19,6 +19,7 @@ const ROUTE_TEMPLATE_KEY_LOGIN = 'login'
 const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
 const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
+const ROUTE_TEMPLATE_KEY_EMPLOYEE = 'employee'
 
 /**
  * Route constants.
@@ -34,6 +35,7 @@ const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
 const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
+const ROUTE_EMPLOYEE = '/employee'
 
 /**
  * Defines the routing templates used.
@@ -49,6 +51,7 @@ template(ROUTE_TEMPLATE_KEY_LOGIN, login)
 template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
 template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
+template(ROUTE_TEMPLATE_KEY_EMPLOYEE, employee)
 
 /**
  * Defines the #/... url routes and the templates they match..
@@ -64,6 +67,7 @@ route(ROUTE_LOGIN, ROUTE_TEMPLATE_KEY_LOGIN);
 route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
 route(ROUTE_EQUIPMENT, ROUTE_TEMPLATE_KEY_EQUIPMENT);
+route(ROUTE_EMPLOYEE, ROUTE_TEMPLATE_KEY_EMPLOYEE);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
  */
@@ -94,15 +98,24 @@ function home() {
 }
 
 function booking() {
-    $('#view').html(cloneHtmlTemplate('template-booking'));
-    bookingsRenderer.updateUI("");
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-booking'));
+        bookingsRenderer.updateUI("");
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
 }
 
 function booking_calendar() {
-    $('#view').html(cloneHtmlTemplate('template-booking-calendar'));
-    document.getElementById("view").setAttribute("class", "container-fluid")
-    bookingCalendar.updateUI()
-    // bookingCalendarRenderer.updateUI();
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-booking-calendar'));
+        document.getElementById("view").setAttribute("class", "container-fluid")
+        bookingCalendar.updateUI()
+        // bookingCalendarRenderer.updateUI();
+        document.getElementById('user').value = getUser().username;
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
 }
 
 /**
@@ -127,8 +140,13 @@ function diner() {
 };
 
 function equipment() {
-    $('#view').html(cloneHtmlTemplate('template-equipment'));
-    equipmentRenderer.updateUI();
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-equipment'));
+        equipmentRenderer.updateUI();
+        document.getElementById('user').value = getUser().username;
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
 };
 
 /**
@@ -194,6 +212,20 @@ function admin() {
         document.getElementById('user').value = getUser().username;
         imageUploader.updateGallery();
     } else {
-        $('#view').html(`<h1>You're not logged in, which is required for this page.</h1>`);
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
+}
+
+/**
+ * Restricted route action.
+ */
+function employee() {
+
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-employee'));
+        employeeRenderer.updateUI();
+        document.getElementById('user').value = getUser().username;
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
 }
