@@ -161,7 +161,7 @@ async function login() {
     let roles = ['Admin', 'Developer', 'User']
 
     let user = username + "-" + password;
-    let dataUser = await imageUploader.operationData("http://localhost:8080/api/v1/users/login/", "", user, "GET");
+    let dataUser = await utilFetch.operationData("user/login/", user, "", "GET");
 
     if (dataUser != null && dataUser != "-") {
         createUserSession(username, btoa(password), roles)
