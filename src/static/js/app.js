@@ -11,6 +11,7 @@ var htmlTemplateCache = new Map()
 const ROUTE_TEMPLATE_KEY_HOME = 'home'
 const ROUTE_TEMPLATE_KEY_BOOKING = 'booking'
 const ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR = 'booking/calendar'
+const ROUTE_TEMPLATE_KEY_ORDER = 'order'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
 const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
 const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
@@ -27,6 +28,7 @@ const ROUTE_TEMPLATE_KEY_PRODUCT_ITEM = 'productItem'
 const ROUTE_HOME = '/'
 const ROUTE_BOOKING = '/booking'
 const ROUTE_BOOKING_CALENDAR = '/booking/calendar'
+const ROUTE_ORDER = '/order'
 const ROUTE_ABOUT = '/about'
 const ROUTE_BOWLING = '/bowling'
 const ROUTE_AIRHOCKEY = '/airHockey'
@@ -43,6 +45,7 @@ const ROUTE_PRODUCT_ITEM = '/productItem' // TODO make admin only page
 template(ROUTE_TEMPLATE_KEY_HOME, home)
 template(ROUTE_TEMPLATE_KEY_BOOKING, booking)
 template(ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR, booking_calendar)
+template(ROUTE_TEMPLATE_KEY_ORDER, order)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
 template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
 template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
@@ -59,6 +62,7 @@ template(ROUTE_TEMPLATE_KEY_PRODUCT_ITEM, productItem)
 route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
 route(ROUTE_BOOKING, ROUTE_TEMPLATE_KEY_BOOKING);
 route(ROUTE_BOOKING_CALENDAR, ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR);
+route(ROUTE_ORDER, ROUTE_TEMPLATE_KEY_ORDER);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
 route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
 route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
@@ -107,6 +111,11 @@ function booking_calendar() {
     document.getElementById("view").setAttribute("class", "container-fluid")
     bookingCalendar.updateUI()
     // bookingCalendarRenderer.updateUI();
+}
+
+function order() {
+    $('#view').html(cloneHtmlTemplate('template-order'));
+    //bookingsRenderer.updateUI("");
 }
 
 /**
@@ -170,7 +179,7 @@ async function login() {
     let roles = ['Admin', 'Developer', 'User']
 
     let user = username + "-" + password;
-    let dataUser = await imageUploader.operationData("http://localhost:8080/api/v1/users/login/", "", user, "GET");
+    let dataUser = await utilFetch.operationData("user/login/", user, "", "GET");
 
     if (dataUser != null && dataUser != "-") {
         createUserSession(username, btoa(password), roles)

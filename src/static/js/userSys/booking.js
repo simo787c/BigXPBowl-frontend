@@ -101,6 +101,7 @@ class Bookings {
         }
         // CLG
         console.log("Activity ID: " + this.activityId + "\nTimeSlot ID: " + this.timeSlotId)
+        this.validateBooking();
     }
 
     async createBookingRefractor(activityType) {
@@ -166,7 +167,7 @@ class Bookings {
 
         // Syntax for Post
         await utilFetch.operationData("booking", "", bookingData, "POST");
-        
+
         $('#bookingModal').modal('hide');
     }
 
@@ -197,5 +198,32 @@ class Bookings {
             }
         }
     }
+
+    /**
+     * This method is for the second modal, where your create booking (input email).
+     * This is for have to input email before creating booking
+     */
+    validateBooking() {
+        const btnNext = document.getElementById('btn-create-booking-id');
+        btnNext.disabled = true
+
+        const email = document.querySelector('#email');
+
+        email.addEventListener('input', updateBookingValue);
+
+        function updateBookingValue() {
+            if (bookings.validateEmail(email.value)) {
+                btnNext.disabled = false
+            } else {
+                btnNext.disabled = true
+            }
+        }
+    }
+
+    validateEmail = (email) => {
+        return email.match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+    };
 }
 var bookings = new Bookings();
