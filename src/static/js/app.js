@@ -19,6 +19,7 @@ const ROUTE_TEMPLATE_KEY_LOGIN = 'login'
 const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
 const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
+const ROUTE_TEMPLATE_KEY_PRODUCT_ITEM = 'productItem'
 
 /**
  * Route constants.
@@ -34,6 +35,7 @@ const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
 const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
+const ROUTE_PRODUCT_ITEM = '/productItem' // TODO make admin only page
 
 /**
  * Defines the routing templates used.
@@ -49,6 +51,7 @@ template(ROUTE_TEMPLATE_KEY_LOGIN, login)
 template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
 template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
+template(ROUTE_TEMPLATE_KEY_PRODUCT_ITEM, productItem)
 
 /**
  * Defines the #/... url routes and the templates they match..
@@ -64,6 +67,7 @@ route(ROUTE_LOGIN, ROUTE_TEMPLATE_KEY_LOGIN);
 route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
 route(ROUTE_EQUIPMENT, ROUTE_TEMPLATE_KEY_EQUIPMENT);
+route(ROUTE_PRODUCT_ITEM, ROUTE_TEMPLATE_KEY_PRODUCT_ITEM);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
  */
@@ -129,6 +133,11 @@ function diner() {
 function equipment() {
     $('#view').html(cloneHtmlTemplate('template-equipment'));
     equipmentRenderer.updateUI();
+};
+
+function productItem() {
+    $('#view').html(cloneHtmlTemplate('template-productItem'));
+    productItemRenderer.updateUI();
 };
 
 /**
