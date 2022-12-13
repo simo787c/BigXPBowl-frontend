@@ -165,7 +165,7 @@ class Bookings {
         //console.log(bookingData)
 
         // Syntax for Post
-        await utilFetch.operationData("bookings", "", bookingData, "POST");
+        await utilFetch.operationData("booking", "", bookingData, "POST");
     }
 
     //TODO Update booking & Cancel booking

@@ -6,15 +6,15 @@ class TimeSlotRenderer {
     }
 
     async getTimeSlot() {
-        this.data = await utilFetch.operationData("timeSlots/", "", "", "GET");
-        this.bookingData = await utilFetch.operationData("bookings/", "", "", "GET");
+        this.data = await utilFetch.operationData("timeslot/", "", "", "GET");
+        this.bookingData = await utilFetch.operationData("booking/", "", "", "GET");
         //this.timeSlotUpdateUI()
     }
 
 
     async updateUI() {
         let timeSlot = document.getElementById("timeSlot");
-        let data = await utilFetch.operationData("timeSlots/", "", "", "GET");
+        let data = await utilFetch.operationData("timeslot/", "", "", "GET");
         document.getElementById("view").setAttribute("class", "container-fluid")
 
         try {

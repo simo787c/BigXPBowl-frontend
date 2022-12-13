@@ -6,7 +6,7 @@ class BookingsRenderer {
     async updateUI(query) {
         let bookings = document.getElementById("bookings");
         //if nothing is searched, every entry will match the empty query
-        let data = await utilFetch.operationData("bookings/search?query=" + query, "", "", "GET");
+        let data = await utilFetch.operationData("booking/search?query=" + query, "", "", "GET");
 
         document.getElementById("view").setAttribute("class", "container-fluid")
 
@@ -68,7 +68,7 @@ class BookingsRenderer {
             // Syntax for Get
             let activityData = await utilFetch.operationData(activityType, activityId, "", "GET");
             clone.querySelector(".activityType").innerHTML += await activityData.name + "<br>"
-            let timeslot = await utilFetch.operationData("timeSlots/", "", "", "GET");
+            let timeslot = await utilFetch.operationData("timeslot/", "", "", "GET");
             for (let j = 0; j < timeslot.length; j++) {
                 if (activityJT[i].timeSlotId == timeslot[j].timeSlotId) {
                     clone.querySelector(".timeSlot").innerHTML += timeslot[j].startTime  + "<br>"
@@ -95,7 +95,7 @@ class BookingsRenderer {
 
     deleteBooking(id) {
         if (this.confirmDelete()) {
-            utilFetch.operationData("bookings/", id, "", "DELETE");
+            utilFetch.operationData("booking/", id, "", "DELETE");
             //Remove deleted element from UI
             console.log("ID: "+id)
             $('#' + id).remove();
@@ -111,7 +111,7 @@ class BookingsRenderer {
 
     async editBooking(id) {
         console.log("edit clicked " + id);
-        let data = await utilFetch.operationData("bookings/", id, "", "GET");
+        let data = await utilFetch.operationData("booking/", id, "", "GET");
 
         document.getElementById("bookingRowId").value = data.bookingId;
         document.getElementById('email').value = data.email;

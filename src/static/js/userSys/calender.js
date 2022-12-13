@@ -1,5 +1,5 @@
 class BookingCalendar {
-    endpointURL = "http://localhost:8080/api/v1/timeSlots/";
+    endpointURL = "http://localhost:8080/api/v1/timeslot/";
 
     constructor(data) {
         this.data = data;
@@ -14,8 +14,8 @@ class BookingCalendar {
 
     //async fetch, await response then call update
     async fetchData() {
-        this.data = await utilFetch.operationData('bookings/', '', '', 'GET');
-        this.dataTimeSlot = await utilFetch.operationData('timeSlots/', '', '', 'GET');
+        this.data = await utilFetch.operationData('booking/', '', '', 'GET');
+        this.dataTimeSlot = await utilFetch.operationData('timeslot/', '', '', 'GET');
         this.calendarApp();
         //console.log(this.data)
         //console.log(this.dataTimeSlot)
@@ -443,7 +443,7 @@ class BookingCalendar {
                 // safe to remove from array
                 var idx = this.aptDates.indexOf(deletedDate.toString());
                 // Delete booking
-                utilFetch.operationData("bookings/", (idx + 1), "", "DELETE");
+                utilFetch.operationData("booking/", (idx + 1), "", "DELETE");
 
                 if (idx >= 0) {
                     this.aptDates.splice(idx, 1);
