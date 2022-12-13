@@ -166,6 +166,8 @@ class Bookings {
 
         // Syntax for Post
         await utilFetch.operationData("booking", "", bookingData, "POST");
+        
+        $('#bookingModal').modal('hide');
     }
 
     //TODO Update booking & Cancel booking
