@@ -8,7 +8,8 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 
     <link rel="stylesheet" href="./static/css/styles.css">
     <link rel="stylesheet" href="./static/css/calendar-style.css">
@@ -406,44 +407,7 @@
 
         </template>
 
-        <template id="template-employee">
-            <div class="page-content" id="content">
-                <h2 class="text-center">Personale</h2>
-
-                <div class="table-responsive pt-2">
-                    <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
-                        <thead>
-                            <tr>
-                                <th>Navn</th>
-                                <th>Titel</th>
-                                <th>Afdeling</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="employee-table"></tbody>
-                    </table>
-                </div>
-            </div>
-        </template>
-
-        <template id="template-employee-table">
-            <td class="employee-name"></td>
-            <td class="employee-title"></td>
-            <td class="employee-department"></td>
-            <td class="Options text-center">
-                <button type="button" class="btn btn-sm btn-primary my-1 editButton" value=""
-                    onclick="bookingsRenderer.editBooking(this.value)" data-bs-toggle="modal"
-                    data-bs-target="#modalEdit">
-                    <i class="bi bi-pencil-square">
-                    </i>
-                </button>
-                <button type="button" class="btn btn-sm btn-danger my-1 deleteButton" value=""
-                    onclick="bookingsRenderer.deleteBooking(this.value)">
-                    <i class="bi bi-trash-fill">
-                    </i>
-                </button>
-            </td>
-        </template>
+        <div data-include="template-employee"></div>
 
         <template id="template-booking">
             <div class="page-content" id="content">

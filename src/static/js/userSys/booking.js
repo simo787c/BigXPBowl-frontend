@@ -4,6 +4,7 @@
  * 2. activityTimeSlot(activityType)
  * 3. createBookingRefractor(activityType)
  * 4. validateInput()
+ * 5. validateBooking()
  */
 class Bookings {
 
@@ -92,6 +93,7 @@ class Bookings {
         // Bowling Data that will get send to patch
         const activityDataJT = Object.fromEntries(activityEntity);
         // Syntax for PATCH
+        await utilFetch.operationData(`activities/${activityType}/`, this.activityId, activityDataJT, "PATCH");
         await utilFetch.operationData(`activities/${activityType}/`, this.activityId, activityDataJT, "PATCH");
         // GET
         if (activityType == "bowling") {

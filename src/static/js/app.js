@@ -120,7 +120,6 @@ function booking_calendar() {
         document.getElementById("view").setAttribute("class", "container-fluid")
         bookingCalendar.updateUI()
         // bookingCalendarRenderer.updateUI();
-        document.getElementById('user').value = getUser().username;
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
@@ -157,7 +156,6 @@ function equipment() {
     if (isLoggedIn()) {
         $('#view').html(cloneHtmlTemplate('template-equipment'));
         equipmentRenderer.updateUI();
-        document.getElementById('user').value = getUser().username;
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
@@ -243,7 +241,6 @@ function employee() {
     if (isLoggedIn()) {
         $('#view').html(cloneHtmlTemplate('template-employee'));
         employeeRenderer.updateUI();
-        document.getElementById('user').value = getUser().username;
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
