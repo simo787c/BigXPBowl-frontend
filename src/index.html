@@ -38,6 +38,7 @@
     <!-- <script src="./static/js/userSys/getBookings.js"></script> -->
     <script src="./static/js/includeshtml.js"></script>
     <script src="./static/js/sub-menu.js"></script>
+    <script src="./static/js/adminSys/ProductItemService.js"></script>
 
 </head>
 
@@ -739,81 +740,6 @@
                 </div>
                 <script src="./static/js/adminSys/EquipmentService.js"></script>
         </template>
-
-        <template id="template-productItem">
-            <div class="page-content vh-100" id="content">
-                <h2 class="text-center">Varelager Oversigt</h2>
-
-                <table class="table table-striped table-bordered table-hover border-dark table-success shadow">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>navn</th>
-                            <th>pris</th>
-                            <th>produkt type</th>
-                            <th>beskrivelse</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody id="productItems"></tbody>
-                </table>
-
-                <button type="button" onclick="equipmentRenderer.createButtonClick()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalPost">
-                    Tilføj nyt produkt
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="modalPost" tabindex="-1" aria-labelledby="modalPostLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="modalPostLabel">Opret Produkt</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-
-                                <form class="form" id="formPost" method="POST" autocomplete="off"
-                                    enctype="application/x-www-form-urlencoded">
-                                    <div class="modal-body">
-                                        <!-- activityType,name,description,condition -->
-                                        <input hidden name="productItemMethodType" id="productItemMethodType" readonly></input>
-                                        <input hidden name="id" id="id" readonly></input>
-                                        <label for="name" class="col">navn</label>
-                                        <input name="name" id="name" class="form-control col" autocomplete="off" type="text" ></input>
-                                        <label for="activityType" class="col">Aktivitet</label>
-                                        <select name="activityType" id="activityType" class="form-control col">
-                                            <option value="Bowling">Bowling</option>
-                                            <option value="Air Hockey">Air Hockey</option>
-                                        </select>
-                                        <label for="description" class="col">Beskrivelse</label>
-                                        <input name="description" id="description" class="form-control col" autocomplete="off"
-                                            type="text"></input>
-                                        <label for="condition" class="col">Tilstand</label>
-                                        <select name="condition" id="condition" class="form-control col">
-                                            <option value="Ny">Ny</option>
-                                            <option value="Ødelagt">Ødelagt</option>
-                                            <option value="Bestil Forsyning">Bestil forsyning</option>
-                                        </select>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <input class="btn btn-success" type="submit" id="submitButton" value="Tilføj"
-                                            data-bs-dismiss="modal"></input>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script src="./static/js/adminSys/ProductItemService.js"></script>
-        </template>
-
-
 
         <!-- include template-equipment-item html -->
         <div data-include="template-equipment-item"></div>
