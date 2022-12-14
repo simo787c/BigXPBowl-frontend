@@ -15,7 +15,8 @@
  *      - Activites when the create button is clicked.
  *      - It updates button in modal so it says "Opret" 
  *      and gives attribute onclick with createEmployee(), 
- *      so when the button "Opret" is clicked it will activite createEmployee and create an employee
+ *      so when the button "Opret" is clicked it will activite createEmployee and create an employee.
+ *      - It also clears the input fields so it's ready for new data
  * 3. createEmployee()
  *      - This method takes value from input fields and insert into a object and makes a POST whith the data
  *      - It calls method updateUI() to see the new data in table and closes the modal.
