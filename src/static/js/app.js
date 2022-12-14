@@ -128,7 +128,7 @@ function booking_calendar() {
 function order() {
     $('#view').html(cloneHtmlTemplate('template-order'));
     document.getElementById("view").setAttribute("class", "container-fluid")
-    //bookingsRenderer.updateUI("");
+    orderRenderer.updateUI("");
 }
 
 /**
