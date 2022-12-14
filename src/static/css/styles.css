@@ -64,6 +64,12 @@
     left: 0;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.4s;
+    padding-bottom: 150px;
+}
+
+#sidebar {
+    position: fixed;
+    overflow-y: auto;
 }
 
 .page-content {
@@ -377,4 +383,19 @@ legend {
     background-color: #cccccc;
     color: #666666;
     /* color: #edf1f2; */
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+	background: transparent;
+	width: 5px;
+	height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #3c3f58;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(0, 0, 0, 0.3);
 }
