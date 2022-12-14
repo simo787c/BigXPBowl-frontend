@@ -76,6 +76,11 @@ class EmployeeRenderer {
     openCreateEmployeeModal() {
         $(".btn-employee-modal").val("Opret")
         $(".btn-employee-modal").attr("onclick", "employeeRenderer.createEmployee()")
+        document.getElementById("employeeName").value = "";
+        document.getElementById("employeeEmail").value = "";
+        document.getElementById("employeePhoneNr").value = "";
+        document.getElementById("employeeTitle").value = "";
+        document.getElementById("employeeDepartment").value = "";
     }
 
     async createEmployee() {
