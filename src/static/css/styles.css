@@ -399,3 +399,9 @@ legend {
 ::-webkit-scrollbar-thumb:hover {
 	background-color: rgba(0, 0, 0, 0.3);
 }
+
+#scheduler {
+    /* position:fixed; */
+    overflow-y: scroll;
+    overflow-x: hidden;  
+}

@@ -25,6 +25,12 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- devexpress -->
+    <!-- <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.spa.css"> -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.common.css">
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/17.2.4/css/dx.light.css">
+    <script src="https://cdn3.devexpress.com/jslib/17.2.4/js/dx.all.js"></script>
+
     <script src="./static/js/router.js" defer></script>
     <script src="./static/js/app.js" defer></script>
     <script src="./static/js/util-fetch.js" defer></script>
@@ -40,7 +46,8 @@
     <script src="./static/js/includeshtml.js"></script>
     <script src="./static/js/sub-menu.js"></script>
     <script src="./static/js/adminSys/ProductItemService.js"></script>
-
+    <script src="./static/js/adminSys/schedule.js" defer></script>
+    
 </head>
 
 <body>
@@ -91,8 +98,21 @@
                             </a>
                         </li>-->
                         <li class="nav-item">
-                            <a class="nav-link text-dark font-italic restricted-anchor disabled"
-                                href="#/employee">Personale</a>
+                            <!-- <a class="nav-link text-dark font-italic restricted-anchor disabled"
+                                href="#/employee">Personale</a> -->
+                                <a class="sub-btn nav-link text-dark font-italic restricted-anchor disabled">Personale</a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="#/employee"
+                                        class="sub-item nav-link text-dark font-italic restricted-anchor disabled">Oversigt
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#/schedule"
+                                        class="sub-item nav-link text-dark font-italic restricted-anchor disabled">Vagtplan
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#/order" class="nav-link text-dark font-italic">
@@ -410,6 +430,8 @@
         </template>
 
         <div data-include="template-employee"></div>
+
+        <div data-include="template-schedule"></div>
 
         <template id="template-booking">
             <div class="page-content" id="content">

@@ -21,6 +21,7 @@ const ROUTE_TEMPLATE_KEY_LOGOUT = 'logout'
 const ROUTE_TEMPLATE_KEY_ADMIN = 'admin'
 const ROUTE_TEMPLATE_KEY_EQUIPMENT = 'equipment'
 const ROUTE_TEMPLATE_KEY_EMPLOYEE = 'employee'
+const ROUTE_TEMPLATE_KEY_SCHEDULE = 'schedule'
 const ROUTE_TEMPLATE_KEY_PRODUCT_ITEM = 'productItem'
 
 /**
@@ -39,6 +40,7 @@ const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
 const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
 const ROUTE_EMPLOYEE = '/employee'
+const ROUTE_SCHEDULE = '/schedule'
 const ROUTE_PRODUCT_ITEM = '/productItem' // TODO make admin only page
 
 /**
@@ -57,6 +59,7 @@ template(ROUTE_TEMPLATE_KEY_LOGOUT, logout)
 template(ROUTE_TEMPLATE_KEY_ADMIN, admin)
 template(ROUTE_TEMPLATE_KEY_EQUIPMENT, equipment)
 template(ROUTE_TEMPLATE_KEY_EMPLOYEE, employee)
+template(ROUTE_TEMPLATE_KEY_SCHEDULE, schedule)
 template(ROUTE_TEMPLATE_KEY_PRODUCT_ITEM, productItem)
 
 /**
@@ -75,6 +78,7 @@ route(ROUTE_LOGOUT, ROUTE_TEMPLATE_KEY_LOGOUT);
 route(ROUTE_ADMIN, ROUTE_TEMPLATE_KEY_ADMIN);
 route(ROUTE_EQUIPMENT, ROUTE_TEMPLATE_KEY_EQUIPMENT);
 route(ROUTE_EMPLOYEE, ROUTE_TEMPLATE_KEY_EMPLOYEE);
+route(ROUTE_SCHEDULE, ROUTE_TEMPLATE_KEY_SCHEDULE);
 route(ROUTE_PRODUCT_ITEM, ROUTE_TEMPLATE_KEY_PRODUCT_ITEM);
 /**
  * Clones an embedded HTML template, from the HTML file, via an id.
@@ -241,6 +245,20 @@ function employee() {
     if (isLoggedIn()) {
         $('#view').html(cloneHtmlTemplate('template-employee'));
         employeeRenderer.updateUI();
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
+}
+
+/**
+ * Restricted route action.
+ */
+ function schedule() {
+
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-schedule'));
+        document.getElementById("view").setAttribute("class", "container-fluid")
+        scheduleRenderer.updateUI();
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
     }
