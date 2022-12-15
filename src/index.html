@@ -40,6 +40,7 @@
     <script src="./static/js/includeshtml.js"></script>
     <script src="./static/js/sub-menu.js"></script>
     <script src="./static/js/adminSys/ProductItemService.js"></script>
+    <script src="./static/js/adminSys/OrderListService.js"></script>
 
 </head>
 
@@ -134,8 +135,8 @@
                     <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Restaurant</p>
                     <ul class="nav flex-column bg-white mb-0">
                         <li class="nav-item">
-                            <a href="#" class="nav-link text-dark font-italic">
-                                Bestilling
+                            <a href="#/orderList" class="nav-link text-dark font-italic">
+                                Ordrer
                             </a>
                         </li>
                         <li class="nav-item">
@@ -756,6 +757,9 @@
 
           <!-- include template-product-item html -->
           <div data-include="template-product-item"></div>
+
+          <!-- include template-orderList html -->
+          <div data-include="template-orderList"></div>
 
 
         <template id="template-image">

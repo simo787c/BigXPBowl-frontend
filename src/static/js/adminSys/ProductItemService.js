@@ -67,9 +67,10 @@ class ProductItemRenderer {
     }
 
     async openEditProductItem(id) {
-        let data = await utilFetch.operationData("product/productItem/", id, "", "GET");
+        let data = await utilFetch.operationData("product/productItems/", id, "", "GET");
         $(".btn-productItem-modal").attr("onclick", "productItemRenderer.editProductItem()")
 
+        document.getElementById("staticBackdropLabel").innerHTML = "Redigér Produkt"
         $(".btn-productItem-modal").val("Gem")
 
         this.productItemId = id;

@@ -12,6 +12,7 @@ const ROUTE_TEMPLATE_KEY_HOME = 'home'
 const ROUTE_TEMPLATE_KEY_BOOKING = 'booking'
 const ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR = 'booking/calendar'
 const ROUTE_TEMPLATE_KEY_ORDER = 'order'
+const ROUTE_TEMPLATE_KEY_ORDERLIST = 'orderList'
 const ROUTE_TEMPLATE_KEY_ABOUT = 'about'
 const ROUTE_TEMPLATE_KEY_BOWLING = 'bowling'
 const ROUTE_TEMPLATE_KEY_AIRHOCKEY = 'airHockey'
@@ -30,6 +31,7 @@ const ROUTE_HOME = '/'
 const ROUTE_BOOKING = '/booking'
 const ROUTE_BOOKING_CALENDAR = '/booking/calendar'
 const ROUTE_ORDER = '/order'
+const ROUTE_ORDERLIST = '/orderList'
 const ROUTE_ABOUT = '/about'
 const ROUTE_BOWLING = '/bowling'
 const ROUTE_AIRHOCKEY = '/airHockey'
@@ -37,9 +39,9 @@ const ROUTE_DINER = '/diner'
 const ROUTE_LOGIN = '/login'
 const ROUTE_LOGOUT = '/logout'
 const ROUTE_ADMIN = '/admin'
-const ROUTE_EQUIPMENT = '/equipment' // TODO make admin only page
+const ROUTE_EQUIPMENT = '/equipment'
 const ROUTE_EMPLOYEE = '/employee'
-const ROUTE_PRODUCT_ITEM = '/productItem' // TODO make admin only page
+const ROUTE_PRODUCT_ITEM = '/productItem'
 
 /**
  * Defines the routing templates used.
@@ -48,6 +50,7 @@ template(ROUTE_TEMPLATE_KEY_HOME, home)
 template(ROUTE_TEMPLATE_KEY_BOOKING, booking)
 template(ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR, booking_calendar)
 template(ROUTE_TEMPLATE_KEY_ORDER, order)
+template(ROUTE_TEMPLATE_KEY_ORDERLIST, orderList)
 template(ROUTE_TEMPLATE_KEY_ABOUT, about)
 template(ROUTE_TEMPLATE_KEY_BOWLING, bowling)
 template(ROUTE_TEMPLATE_KEY_AIRHOCKEY, airHockey)
@@ -66,6 +69,7 @@ route(ROUTE_HOME, ROUTE_TEMPLATE_KEY_HOME);
 route(ROUTE_BOOKING, ROUTE_TEMPLATE_KEY_BOOKING);
 route(ROUTE_BOOKING_CALENDAR, ROUTE_TEMPLATE_KEY_BOOKING_CALENDAR);
 route(ROUTE_ORDER, ROUTE_TEMPLATE_KEY_ORDER);
+route(ROUTE_ORDERLIST, ROUTE_TEMPLATE_KEY_ORDERLIST);
 route(ROUTE_ABOUT, ROUTE_TEMPLATE_KEY_ABOUT);
 route(ROUTE_BOWLING, ROUTE_TEMPLATE_KEY_BOWLING);
 route(ROUTE_AIRHOCKEY, ROUTE_TEMPLATE_KEY_AIRHOCKEY);
@@ -131,6 +135,16 @@ function order() {
     orderRenderer.updateUI("");
 }
 
+function orderList() {
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-orderList'));
+        document.getElementById("view").setAttribute("class", "container-fluid")
+        orderListRenderer.updateUI("");
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }
+}
+
 /**
  * About route action.
  */
@@ -167,7 +181,7 @@ function productItem() {
         productItemRenderer.updateUI();
     } else {
         $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
-    }  
+    }
 };
 
 /**

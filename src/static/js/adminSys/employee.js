@@ -113,6 +113,7 @@ class EmployeeRenderer {
         let data = await utilFetch.operationData("employee/", id, "", "GET");
         $(".btn-employee-modal").attr("onclick", "employeeRenderer.editEmployee()")
 
+        document.getElementById("staticBackdropLabel").innerHTML = "Redigér Ansat"
         $(".btn-employee-modal").val("Gem")
 
         this.employeeId = id;
