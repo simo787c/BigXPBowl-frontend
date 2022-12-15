@@ -1,10 +1,22 @@
 /**
- * 
+ * This class contains these method:
+ * 1. updateUI()
+ * 2. initializeSchedule()
+ * 3. isValidAppointment(component, appointmentData)
+ * 4. isValidAppointmentInterval(startDate, endDate, cellDuration)
+ * 5. isValidAppointmentDate(date)
+ * 6. isHoliday(date)
+ * 7. isDisableDate(date)
+ * 8. createSchedule(shift)
+ * 9. updateSchedule(e)
+ * 10. deleteSchedule(e)
+ *      - confirmDelete()
  */
 class ScheduleRenderer {
 
     constructor() {
-        this.data = [
+        this.data = []
+        /*this.data = [
             {
                 text: "Website Re-Design Plan",
                 startDate: new Date(2022, 11, 15, 9, 30),
@@ -16,8 +28,7 @@ class ScheduleRenderer {
                 endDate: new Date(2022, 11, 16, 16, 0),
                 shift: 6
             }
-        ];
-
+        ];*/
         //this.updateUI();
     }
 
@@ -26,7 +37,7 @@ class ScheduleRenderer {
         // Syntax for Get
         let scheduleData = await utilFetch.operationData("schedule", "", "", "GET");
         this.employeeData = await utilFetch.operationData("employee", "", "", "GET");
-        
+
         console.log(scheduleData)
         try {
             //iterate through each lane, then clone and assign a htmltemplate for it
@@ -51,11 +62,7 @@ class ScheduleRenderer {
         } catch (error) {
             console.log(error)
         }
-        /* this.data.push({
-            text: "Test",
-            startDate: new Date(2022, 11, 17, 10, 0),
-            endDate: new Date(2022, 11, 17, 22, 0)
-        }) */
+
         this.initializeSchedule();
     }
 
@@ -104,6 +111,9 @@ class ScheduleRenderer {
 
         DevExpress.viz.currentTheme("generic.light");
         $(function () {
+            function showToast(event, value, type) {
+                DevExpress.ui.notify(`${event} "${value}" task`, type, 1000);
+            }
             $("#scheduler").dxScheduler({
                 dataSource: scheduleRenderer.data,
                 currentDate: new Date(),
@@ -142,45 +152,14 @@ class ScheduleRenderer {
                     useColorAsDefault: true,
                     label: 'id',
                 }],
-                /* resources: [{
-                    fieldExpr: 'employeeId',
-                    dataSource: scheduleRenderer.employeeData,
-                    useColorAsDefault: true,
-                    label: 'Navn',
-                }], */
-                /* appointmentTooltipTemplate(model) {
-                    console.log(model)
-                    return getTooltipTemplate(getMovieById(model.movieId));
-                    //return getTooltipTemplate(getMovieById(model.targetedAppointmentData.movieId));
-                },
-                appointmentTemplate(model) {
-                    console.log(model.movieId)
-                    const movieInfo = getMovieById(model.movieId) || {};
-                    //const movieInfo = getMovieById(model.targetedAppointmentData.movieId) || {};
-
-                    return $(`${"<div class='showtime-preview'>"
-                        + '<div>'}${movieInfo.text}</div>`
-                        + `<div>Ticket Price: <strong>$${model.price}</strong>`
-                        + '</div>'
-                        + `<div>${model.displayStartDate} - ${model.displayEndDate}</div>`
-                        + '</div>');
-                }, */
                 onAppointmentFormCreated: function (data) {
-                    //console.log("OPEN-1")
+                    //console.log("Open Create")
                     const { form } = data;
-                    //let movieInfo = getMovieById(data.appointmentData.movieId) || {};
-                    //console.log(movieInfo)
                     let { startDate } = data.appointmentData;
-
-                    console.log("id: " + scheduleRenderer.data.id)
 
                     form.option('items',
                         [{
-                            label: {
-                                text: 'ID',
-                            },
-                            //editorType: 'dxSelectBox',
-                            dataField: 'id',
+                            //dataField: 'id',
                             editorOptions: {
                                 items: scheduleRenderer.data,
                                 displayExpr: 'id',
@@ -208,10 +187,6 @@ class ScheduleRenderer {
                                 type: 'datetime',
                                 onValueChanged(args) {
                                     startDate = args.value;
-                                    //let startDateDDMMYYYY = startDate.toLocaleDateString().split(".")
-                                    //let newEndDate = new Date(startDateDDMMYYYY[2], (startDateDDMMYYYY[1] - 1), startDateDDMMYYYY[0], (startDate.getHours() + e.appointmentData.shift), startDate.getMinutes())
-                                    //form.updateData('endDate', new Date(startDate.getTime() + 60 * 1000));
-                                    //form.updateData('endDate', newEndDate);
                                 },
                             },
                         }, {
@@ -240,7 +215,21 @@ class ScheduleRenderer {
                     //console.log(e.appointmentData.endDate)
                     scheduleRenderer.createSchedule(e.appointmentData);
                 },
-                onAppointmentDeleting(e) { //TODO fix so it doesn't delete element when cancel delete
+                onAppointmentAdded(e) {
+                    showToast('Added', e.appointmentData.text, 'success');
+                },
+                onAppointmentUpdating(e) {
+                    // Handler of the "appointmentUpdating" event
+                    scheduleRenderer.updateSchedule(e.newData)
+                },
+                onAppointmentUpdated(e) {
+                    // Handler of the "appointmentUpdated" event
+                    showToast('Updated', e.appointmentData.text, 'info');
+                },
+                onAppointmentDeleted(e) {
+                    showToast('Deleted', e.appointmentData.text, 'warning');
+                },
+                onAppointmentDeleting(e) {
                     scheduleRenderer.deleteSchedule(e);
                 },
             }).dxScheduler("instance");
@@ -295,7 +284,7 @@ class ScheduleRenderer {
         /*var timeStart = shift.startDate.getHours();
         var timeEnd = shift.endDate.getHours();
         var hourDiff = timeEnd - timeStart;*/
-
+        console.log("Create")
         const schedule = new Map([
             ['startDate', shift.startDate],
             ['shiftLength', shift.shift],
@@ -309,12 +298,26 @@ class ScheduleRenderer {
         await utilFetch.operationData(`schedule/`, "", scheduleData, "POST");
     }
 
+    async updateSchedule(e) {
+        console.log("Update")
+        const schedule = new Map([
+            ['id', e.id],
+            ['startDate', e.startDate],
+            ['shiftLength', e.shift],
+            ['employees', [{ 'employeeId': e.employeeId }]],
+        ])
+        const scheduleData = Object.fromEntries(schedule);
+
+        await utilFetch.operationData(`schedule/`, e.id, scheduleData, "PATCH");
+    }
+
     async deleteSchedule(e) {
         if (this.confirmDelete()) {
             await utilFetch.operationData("schedule/", e.appointmentData.id, null, "DELETE")
             console.log('Delete was successful');
         } else {
             console.log('Delete was cancelled');
+            e.cancel = true;
         };
     }
     //Confirm prompt
