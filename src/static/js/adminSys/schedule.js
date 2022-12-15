@@ -201,7 +201,8 @@ class ScheduleRenderer {
                                 displayExpr: 'shiftLength',
                                 valueExpr: 'id',
                             },
-                        }]);
+                        }
+                    ]);
                 },
                 onAppointmentAdding(e) {
                     console.log("ADD")
@@ -217,6 +218,7 @@ class ScheduleRenderer {
                 },
                 onAppointmentAdded(e) {
                     showToast('Added', e.appointmentData.text, 'success');
+                    location.reload();
                 },
                 onAppointmentUpdating(e) {
                     // Handler of the "appointmentUpdating" event
@@ -225,6 +227,7 @@ class ScheduleRenderer {
                 onAppointmentUpdated(e) {
                     // Handler of the "appointmentUpdated" event
                     showToast('Updated', e.appointmentData.text, 'info');
+                    location.reload();
                 },
                 onAppointmentDeleted(e) {
                     showToast('Deleted', e.appointmentData.text, 'warning');

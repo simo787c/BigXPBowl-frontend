@@ -215,13 +215,14 @@ async function login() {
     */
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
-    let roles = ['Admin', 'Developer', 'User']
+    let roles = ['Admin', 'Developer', 'User', "Employee"]
 
     let user = username + "-" + password;
     let dataUser = await utilFetch.operationData("user/login/", user, "", "GET");
 
     if (dataUser != null && dataUser != "-") {
-        createUserSession(username, btoa(password), roles)
+        //createUserSession(username, btoa(password), roles)
+        createUserSession(username, btoa(password), dataUser.role)
         toggleLoginUI(false)
     } else {
         alert("Wrong username or password!")
@@ -260,11 +261,11 @@ function admin() {
  */
 function employee() {
 
-    if (isLoggedIn()) {
+    if (isLoggedIn() && getUser().roles == "Admin" || getUser().roles == "Developer") {
         $('#view').html(cloneHtmlTemplate('template-employee'));
         employeeRenderer.updateUI();
     } else {
-        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in or not an admin, which is required for this page.</h1></div>`);
     }
 }
 

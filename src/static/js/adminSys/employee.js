@@ -104,6 +104,15 @@ class EmployeeRenderer {
         // Syntax for Post
         await utilFetch.operationData("employee", "", employeeData, "POST");
 
+        // Login
+        const loginEnitity = new Map([
+            ['username', email],
+            ['password', name + phoneNr.substring(0, 4)],
+            ['role', 'Employee'],
+        ])
+        const loginData = Object.fromEntries(loginEnitity);
+        await utilFetch.operationData("user/", "", loginData, "POST");
+
         this.updateUI();
 
         $('#employeeModal').modal('hide');

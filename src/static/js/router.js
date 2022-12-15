@@ -3,6 +3,7 @@
 const ROUTER_LOGIN_UI = '#card-login'
 const ROUTER_LOGOUT_UI = '#card-logout'
 const ROUTER_RESTRICTED_ANCHOR = '.restricted-anchor'
+const ROUTER_ADMIN_RESTRICTED_ANCHOR = '.admin-restricted-anchor'
 const ROUTER_USERNAME_UI = '.login-username'
 const ROUTER_DELETE_UI = '#btnDel'
 
@@ -45,21 +46,27 @@ function resetUserSession() {
 function toggleLoginUI(show) {
 
   let user = getUser()
+  
   if (show) {
     $(ROUTER_LOGIN_UI).show();
     $(ROUTER_LOGOUT_UI).hide();
     $(ROUTER_RESTRICTED_ANCHOR).hide();
     $(ROUTER_RESTRICTED_ANCHOR).addClass('disabled');
+    $(ROUTER_ADMIN_RESTRICTED_ANCHOR).hide();
+    $(ROUTER_ADMIN_RESTRICTED_ANCHOR).addClass('disabled');
     //$(ROUTER_RESTRICTED_ANCHOR).addClass('visually-hidden');
     //$(ROUTER_RESTRICTED_ANCHOR).addClass('bg-danger');
     //$(ROUTER_RESTRICTED_ANCHOR).removeClass('bg-success');
-
   } else {
     $(ROUTER_LOGIN_UI).hide();
     $(ROUTER_USERNAME_UI).html(`${user? user.username : '???'}`).show();
     $(ROUTER_LOGOUT_UI).show();
     $(ROUTER_RESTRICTED_ANCHOR).show();
     $(ROUTER_RESTRICTED_ANCHOR).removeClass('disabled');
+    if (user.roles == "Admin" || user.roles == "Developer") {
+      $(ROUTER_ADMIN_RESTRICTED_ANCHOR).show();
+      $(ROUTER_ADMIN_RESTRICTED_ANCHOR).removeClass('disabled');
+    }
     //$(ROUTER_RESTRICTED_ANCHOR).removeClass('visually-hidden');
     //$(ROUTER_RESTRICTED_ANCHOR).addClass('bg-success');
     //$(ROUTER_RESTRICTED_ANCHOR).removeClass('bg-danger');
