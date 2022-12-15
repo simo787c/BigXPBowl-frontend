@@ -166,8 +166,12 @@ function equipment() {
 };
 
 function productItem() {
-    $('#view').html(cloneHtmlTemplate('template-productItem'));
-    productItemRenderer.updateUI();
+    if (isLoggedIn()) {
+        $('#view').html(cloneHtmlTemplate('template-productItem'));
+        productItemRenderer.updateUI();
+    } else {
+        $('#view').html(`<div class="page-content" id="content"><h1>You're not logged in, which is required for this page.</h1></div>`);
+    }  
 };
 
 /**
