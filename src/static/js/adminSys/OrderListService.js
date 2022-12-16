@@ -7,6 +7,7 @@ class OrderListRenderer {
         let orderListTable = document.getElementById("orderList-table");
 
         let data = await utilFetch.operationData("product/orders", "", "", "GET");
+        this.productItemList = await utilFetch.operationData("product/productItems", "", "", "GET");
         document.getElementById("view").setAttribute("class", "")
         console.log(data);
         try {
@@ -34,6 +35,11 @@ class OrderListRenderer {
         } catch (error) {
             console.log(error)
         }
+        this.productItemList.forEach(element => {
+            let target = $('select[name="orderListProductList"]')
+            let options = `<option value="${element.productItemId}">${element.name} </option>`
+            target.append(options)
+        })
     }
 
     openCreateOrderListModal() {
@@ -42,17 +48,24 @@ class OrderListRenderer {
         document.getElementById("orderListName").value = "";
         document.getElementById("orderListEmail").value = "";
         document.getElementById("orderListProductList").value = "";
+
+        
     }
 
     async createOrderList() {
         let name = document.getElementById("orderListName").value;
         let email = document.getElementById("orderListEmail").value;
-        let productList = document.getElementById("orderListProductList").value;
+        let productList = document.getElementById("orderListProductList").value;    
+        
+        let productEntity = new Map([
+            ['productItemId', productList]
+        ])
+        const productData = Object.fromEntries(productEntity)
 
         const orderList = new Map([
             ['name', name],
             ['email', email],
-            ['productList', productList],
+            ['productItemList', [productData]],
         ])
         const orderListData = Object.fromEntries(orderList);
 
@@ -73,18 +86,24 @@ class OrderListRenderer {
         this.orderListId = id;
         document.getElementById("orderListName").value = data.name;
         document.getElementById("orderListEmail").value = data.email;
-        document.getElementById("orderListProductList").value = data.productList;
+        document.getElementById("orderListProductList").value = data.productItemList[0].productItemId;
     }
 
     async editOrderList() {
         let orderListName = document.getElementById("orderListName").value;
         let orderListEmail = document.getElementById("orderListEmail").value;
         let orderListProductList = document.getElementById("orderListProductList").value;
+
+        let productEntity = new Map([
+            ['productItemId', orderListProductList]
+        ])
+        const productData = Object.fromEntries(productEntity)
+
         const orderList = new Map([
-            ['orderListId', this.orderListId],
+            ['orderId', this.orderListId],
             ['name', orderListName],
             ['email', orderListEmail],
-            ['productList', orderListProductList],
+            ['productItemList', [productData]],
         ])
         const orderListData = Object.fromEntries(orderList);
         console.log(orderListData)
