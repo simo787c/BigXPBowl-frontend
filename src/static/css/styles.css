@@ -403,5 +403,6 @@ legend {
 #scheduler {
     /* position:fixed; */
     overflow-y: scroll;
-    overflow-x: hidden;  
+    overflow-x: hidden;
+    margin: auto;  
 }

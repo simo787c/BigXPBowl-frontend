@@ -112,7 +112,7 @@ class ScheduleRenderer {
         DevExpress.viz.currentTheme("generic.light");
         $(function () {
             function showToast(event, value, type) {
-                DevExpress.ui.notify(`${event} "${value}" task`, type, 1000);
+                DevExpress.ui.notify(`${event} "${value}" vagt`, type, 1000);
             }
             $("#scheduler").dxScheduler({
                 dataSource: scheduleRenderer.data,
@@ -202,7 +202,13 @@ class ScheduleRenderer {
                                 valueExpr: 'id',
                             },
                         }
-                    ]);
+                        ]);
+                },
+                onAppointmentAdded(e) {
+                    showToast('Added', e.appointmentData.text, 'success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
                 },
                 onAppointmentAdding(e) {
                     console.log("ADD")
@@ -215,19 +221,17 @@ class ScheduleRenderer {
                     e.appointmentData.endDate = new Date(startDateDDMMYYYY[2], (startDateDDMMYYYY[1] - 1), startDateDDMMYYYY[0], (e.appointmentData.startDate.getHours() + e.appointmentData.shift), e.appointmentData.startDate.getMinutes())
                     //console.log(e.appointmentData.endDate)
                     scheduleRenderer.createSchedule(e.appointmentData);
-                },
-                onAppointmentAdded(e) {
-                    showToast('Added', e.appointmentData.text, 'success');
-                    location.reload();
+                }, 
+                onAppointmentUpdated(e) {
+                    // Handler of the "appointmentUpdated" event
+                    showToast('Updated', e.appointmentData.text, 'success');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1000);
                 },
                 onAppointmentUpdating(e) {
                     // Handler of the "appointmentUpdating" event
                     scheduleRenderer.updateSchedule(e.newData)
-                },
-                onAppointmentUpdated(e) {
-                    // Handler of the "appointmentUpdated" event
-                    showToast('Updated', e.appointmentData.text, 'info');
-                    location.reload();
                 },
                 onAppointmentDeleted(e) {
                     showToast('Deleted', e.appointmentData.text, 'warning');
